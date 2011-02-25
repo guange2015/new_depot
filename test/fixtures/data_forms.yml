@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  comment: MyString
+  s_type: 1
+  state: 1
+
+two:
+  comment: MyString
+  s_type: 1
+  state: 1
