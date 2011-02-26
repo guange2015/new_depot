@@ -6,4 +6,7 @@ function add_data_list()
 	s = s.replace(/\_0\_/g,"_"+num+"_");
 	//alert(s);
 	$("#fieldset"+(num-1)).after("<fieldset id=\"fieldset"+num+"\">"+s+"</fieldset>");
+
+	$("#fieldset"+(num)).hide();
+	$("#fieldset"+(num)).fadeIn(1500);
 }
