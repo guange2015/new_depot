@@ -21,14 +21,14 @@
   </fieldset>
   <br/>
   
-  <%= f.hidden_field :s_type,:value=>1 %>
+  <%= f.hidden_field :s_type,:value => s_type_to_value(@type) %>
   <fieldset id="fieldset0">
   <% f.fields_for :data_lists do |d| %>
   	<%=d.label "品名==规格" %>：
   	<%= select_firework_name_tag(d) %>  
   	<%= d.label s_type_to_s(@type)+"量" %>：
     <%= d.text_field :data_number,:size=>3 %><span class="require">*必须填写数字</span>
-    <%= d.hidden_field :s_type,:value=>1 %>
+    <%= d.hidden_field :s_type,:value => s_type_to_value(@type) %>
   <% end %>
   </fieldset>
 

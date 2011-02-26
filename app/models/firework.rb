@@ -1,6 +1,6 @@
 #coding=utf-8
 # == Schema Information
-# Schema version: 20110225150309
+# Schema version: 20110226061357
 #
 # Table name: fireworks
 #
@@ -10,6 +10,7 @@
 #  lastdata   :integer         default(0)
 #  created_at :datetime
 #  updated_at :datetime
+#  comment    :string(60)
 #
 
 class Firework < ActiveRecord::Base

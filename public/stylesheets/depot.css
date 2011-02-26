@@ -81,3 +81,39 @@ a.button:hover {
     color:#F60;
     background-color:EFF7FE;
     }
+
+.require,.high{
+    color:red;
+}
+
+.header{
+    margin:0 auto;
+    width:75%;
+    padding:20px 0 0 0;
+    margin-bottom:0px;
+    }
+    
+.header ul{
+    padding:0;
+    margin:0;
+    }
+.header ul li{
+    list-style:none;
+    display:inline-block;
+    width:100px;
+    background-color:#A7B7F5;
+    height:30px;
+    margin-left:0.5px;
+    text-align:center;
+    padding-top:10px;   
+    color: #FFF;
+    }
+.header ul li a{
+    color:#F60;
+}
+.header ul li a:hover{
+    color:#06C;
+}
+#container{
+    margin-top:0;
+    }

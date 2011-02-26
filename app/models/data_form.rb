@@ -34,6 +34,6 @@ class DataForm < ActiveRecord::Base
 	end
 
 	def finish!
-		state=2
+		self.state = 2
 	end
 end

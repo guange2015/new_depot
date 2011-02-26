@@ -11,7 +11,7 @@
 	<th>操作</th>
 	</tr>
 
-	<% @data_form.data_lists.each do |f| %>
+	<% @data_form.data_lists.order("created_at asc").each do |f| %>
 	<tr>
 		<td><%= f.get_type %></td>
 		<td><%= f.firework.name %></td>

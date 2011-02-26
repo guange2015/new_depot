@@ -1,5 +1,12 @@
 <h1>仓库库存列表</h1>
 
+<%= form_tag(search_path, :method => "get") do %>
+  <%= label_tag(:q, "输入品名关键字:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("搜索") %>
+<% end %>
+<br />
+
 <table>
 	<tr>
 	<th>品名</th>
@@ -10,7 +17,7 @@
 
 	<% @fireworks.each do |f| %>
 	<tr>
-		<td><%= f.name %></td>
+		<td><%= link_to f.name, f %></td>
 		<td><%= f.spec %></td>
 		<td><%= f.lastdata %></td>
 		<td><%= link_delete f  %></td>

@@ -1,10 +1,11 @@
 NewDepot::Application.routes.draw do
-
-  #get "firework/new"
   resources :fireworks
   resources :data_forms
+  resources :data_lists
 
   match 'finished/:id' => 'fireworks#finished', :as => :finished
+  get 'search', :controller=>:fireworks, :action =>'search'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

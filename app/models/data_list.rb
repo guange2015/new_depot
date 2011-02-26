@@ -1,6 +1,6 @@
 #coding=utf-8
 # == Schema Information
-# Schema version: 20110225150309
+# Schema version: 20110226061357
 #
 # Table name: data_lists
 #
@@ -13,6 +13,7 @@
 #  state        :integer         default(1)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  before_data  :integer
 #
 
 class DataList < ActiveRecord::Base
@@ -20,17 +21,17 @@ class DataList < ActiveRecord::Base
   belongs_to :firework
 
 
-  attr_accessor :name, :spec
+  #attr_accessor :name, :spec
 
   def get_type
-		s_type==2 ? "出库" : "入库"
+	s_type == 2 ? "出库" : "入库"
   end
 
   def finished?
-		state==2
-	end
+	state == 2
+  end
 
-	def finish!
-		state=2
-	end
+  def finish!
+	self.state = 2
+  end
 end

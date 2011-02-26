@@ -1,7 +1,7 @@
 #coding=utf-8
 module ApplicationHelper
 	def format_date(f)
-		f.strftime("%Y-%m-%d %H:%M")
+		f.strftime("%Y-%m-%d %H:%M") if f
 	end
 
 	def link_delete(f)
@@ -11,4 +11,17 @@ module ApplicationHelper
 	def s_type_to_s(s)
 		s == "in" ? "入库" : "出库"
 	end
+
+	def s_type_to_value(s)
+		s == "in" ? 1 : 2
+	end
+
+	def encode_utf_url(code)
+	  Base64.encode64(code).strip.gsub(/%/,"|").gsub(/[=]/,"!").gsub(/\+/,'*').gsub(/\//,'-')
+	end
+	
+	def decode_utf_url(code)
+	  Base64.decode64(code.gsub(/|/,"%").gsub(/!/,"=").gsub(/\*/,'+').gsub(/\-/,'/'))
+	end
+
 end

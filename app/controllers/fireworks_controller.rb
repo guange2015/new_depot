@@ -23,11 +23,23 @@ class FireworksController < ApplicationController
     redirect_to fireworks_path
   end
 
+  def show
+    @firework = Firework.find(params[:id])
+  end
+
+  def search
+    @fireworks = my_search(
+                    params[:encode] == "base64" ? decode_utf_url(params[:q]) : params[:q], 
+                    params[:spec])
+    render :index
+  end
+
   def finished
     @df = DataForm.find(params[:id])
     unless @df.finished?
       @df.data_lists.each do |dl|
         unless dl.finished?
+          dl.before_data = dl.firework.lastdata
           if dl.s_type == 1
             dl.firework.lastdata += dl.data_number
           elsif dl.s_type == 2
@@ -43,5 +55,13 @@ class FireworksController < ApplicationController
       @df.save!
     end
 
-  end  
+  end 
+  
+  
+  private
+  def my_search(name, spec=nil)
+    find_sql = "name like '%#{name}%'"
+    find_sql << " and spec = '#{spec}' " if spec
+    Firework.where(find_sql).order
+  end 
 end

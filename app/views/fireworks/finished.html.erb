@@ -4,14 +4,16 @@
 	<tr>	
 	<th>单位</th>
 	<th>类型</th>
-	<th>数量</th>
-	<th>库存</th>
+	<th>操作前库存</th>
+	<th>操作数据</th>
+	<th>操作后库存</th>
 	</tr>
 
 	<% @df.data_lists.each do |f| %>
 	<tr>		
 		<td><%= f.firework.name %></td>
 		<td><%= f.firework.spec %></td>
+		<td><%= f.before_data %></td>
 		<td><%= f.data_number %></td>
 		<td><%= f.last_data %></td>
 	</tr>
