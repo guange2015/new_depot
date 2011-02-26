@@ -1,0 +1,19 @@
+<h1>仓库库存列表</h1>
+
+<table>
+	<tr>
+	<th>品名</th>
+	<th>规格</th>
+	<th>库存</th>
+	<th>操作</th>
+	</tr>
+
+	<% @fireworks.each do |f| %>
+	<tr>
+		<td><%= f.name %></td>
+		<td><%= f.spec %></td>
+		<td><%= f.lastdata %></td>
+		<td><%= link_delete f  %></td>
+	</tr>
+	<% end %>
+</table>

@@ -1,4 +1,10 @@
 NewDepot::Application.routes.draw do
+
+  #get "firework/new"
+  resources :fireworks
+  resources :data_forms
+
+  match 'finished/:id' => 'fireworks#finished', :as => :finished
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +54,7 @@ NewDepot::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => "fireworks#index"
 
   # See how all your routes lay out with "rake routes"
 

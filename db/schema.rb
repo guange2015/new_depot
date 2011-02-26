@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110225150309) do
+ActiveRecord::Schema.define(:version => 20110226050228) do
 
   create_table "data_forms", :force => true do |t|
     t.string   "comment"
@@ -34,9 +34,10 @@ ActiveRecord::Schema.define(:version => 20110225150309) do
   create_table "fireworks", :force => true do |t|
     t.string   "name"
     t.integer  "spec"
-    t.integer  "lastdata",   :default => 0
+    t.integer  "lastdata",                 :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "comment",    :limit => 60
   end
 
 end
