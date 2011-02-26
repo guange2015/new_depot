@@ -107,6 +107,7 @@ a.button:hover {
     text-align:center;
     padding-top:10px;   
     color: #FFF;
+    font-weight:bold;
     }
 .header ul li a{
     color:#F60;
