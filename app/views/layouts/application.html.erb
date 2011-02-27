@@ -5,20 +5,21 @@
   <%= stylesheet_link_tag 'application','depot','smoothness/jquery-ui', :cache => true %>
   <%= javascript_include_tag 'jquery','rails','new_depot', :cache=>true %>
   <%= csrf_meta_tag %>
-  
+
 </head>
 <body>
 <div class="header">
 <ul>
 <li><%= link_to "库存明细", fireworks_path %></li>
-<li><%= link_to "新入库", new_firework_path %></li>
-<li><%= link_to "库单操作", data_forms_path %></li>
+<li><%= link_to "新入库", new_firework_path,:title=>"仓库没有货进行首次入库" %></li>
+<li><%= link_to "库单操作", data_forms_path ,:title=>"出库和入库单处理"%></li>
+<li><%= link_to "登出", logout_path, :method=>:delete, :title=>"为了安全，做完帐之后要登出。" %></li>
 </ul>
 </div>
 <div id="container">  
   <%= yield %>
 </div>
 
-<%= debug params if Rails.env.eql? "development" %>
+<%= debug params if admin? || (Rails.env.eql? "development") %>
 </body>
 </html>

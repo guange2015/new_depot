@@ -5,7 +5,7 @@ module ApplicationHelper
 	end
 
 	def link_delete(f)
-		link_to "删除", f, :method => :delete,:confirm => "是否确定删除?" if Rails.env.eql? "development"
+		link_to "删除", f, :method => :delete,:confirm => "是否确定删除?" if admin?
 	end
 
 	def s_type_to_s(s)
@@ -29,4 +29,15 @@ module ApplicationHelper
 			'jquery-ui-i18n','jquery-combobox-min',:cache=>'auto_complete_all'
 	end
 
+	def admin?
+		current_user == "admin"
+	end
+
+	def user?
+		current_user == "user"
+	end
+
+	def current_user
+    	_current_user ||= session[:current_user_id]
+  	end
 end

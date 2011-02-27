@@ -1,7 +1,11 @@
 NewDepot::Application.routes.draw do
+
   resources :fireworks
   resources :data_forms
   resources :data_lists
+  resources :logins
+
+  match 'logout' => 'logins#destroy', :as => :logout
 
   match 'finished/:id' => 'fireworks#finished', :as => :finished
   get 'search', :controller=>:fireworks, :action =>'search'
