@@ -20,7 +20,7 @@ class DataList < ActiveRecord::Base
   belongs_to :data_form
   belongs_to :firework
 
-  validates_presence_of :data_form_id,:firework_id,:s_type
+  validates_presence_of :firework_id,:s_type
   #attr_accessor :name, :spec
 
   def get_type
