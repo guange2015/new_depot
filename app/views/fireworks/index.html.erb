@@ -24,6 +24,11 @@
 	</tr>
 	<% end %>
 </table>
+
+<div class="flickr_pagination">
+      <%=h will_paginate @fireworks, :prev_label=>'上一页', :next_label=> '下一页' %>
+</div>
+
 <%=include_autocomplete_js%>
 <script>
 	$(function() {
