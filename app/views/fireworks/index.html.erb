@@ -20,7 +20,7 @@
 		<td><%= link_to f.name, f %></td>
 		<td><%= f.spec %></td>
 		<td><%= f.lastdata %></td>
-		<td><%= link_delete f  %></td>
+		<td><%= link_delete f,f.data_lists.size==0 %></td>
 	</tr>
 	<% end %>
 </table>
