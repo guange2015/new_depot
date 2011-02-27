@@ -15,7 +15,7 @@
 		<td><%= f.get_type %></td>
 		<td><%= f.get_state %></td>
 		<td><%= format_date(f.created_at) %></td>
-		<td><%= link_delete f %></td>
+		<td><%= link_delete f,!f.finished? %></td>
 	</tr>
 	<% end %>
 </table>

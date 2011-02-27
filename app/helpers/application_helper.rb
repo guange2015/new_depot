@@ -4,8 +4,8 @@ module ApplicationHelper
 		f.strftime("%Y-%m-%d %H:%M") if f
 	end
 
-	def link_delete(f)
-		link_to "删除", f, :method => :delete,:confirm => "是否确定删除?" if admin?
+	def link_delete(f, un_finished=false)
+		link_to "删除", f, :method => :delete,:confirm => "是否确定删除?" if admin? || un_finished
 	end
 
 	def s_type_to_s(s)

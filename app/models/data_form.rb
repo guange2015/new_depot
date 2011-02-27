@@ -17,7 +17,7 @@ class DataForm < ActiveRecord::Base
 
 	accepts_nested_attributes_for :data_lists,
 								  :allow_destroy => true,
-								  :reject_if => proc { |t| t['data_number'].blank? }
+								  :reject_if => proc { |t| t['firework_id'].blank? || t['data_number'].blank? }
 
 	validates_presence_of :comment, :message => "公司必须填写"
 
