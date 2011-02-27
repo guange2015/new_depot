@@ -30,7 +30,7 @@ class FireworksController < ApplicationController
   def search
     @fireworks = my_search(
                     params[:encode] == "base64" ? decode_utf_url(params[:q]) : params[:q], 
-                    params[:spec])
+                    params[:spec]).paginate(:page=>params[:page]||1,:per_page=>20)
     render :index
   end
 

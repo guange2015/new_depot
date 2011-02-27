@@ -1,7 +1,7 @@
 <h1>请输入密码：</h1>
 
 <% if flash[:error] %>
-      <p class="error"><%= flash[:error] %></p>
+      <p class="error high"><%= flash[:error] %></p>
     <% end %>
 <br/>    
 <%= form_tag('/logins') do -%>

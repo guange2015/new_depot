@@ -24,9 +24,12 @@ button.comboboxButton .ui-button-text {display:block; line-height:1;}
 
   <fieldset>
   <div class="field">
-    <%= f.label "描述" %><br />
-    <%= f.text_field :comment %><span class="require">*必须填写</span>
+    <%= f.label "描述" %>
+    <%= f.text_field :comment %><span class="require">*必须填写</span><br/>
+    <%= f.label "日期" %>
+    <%= f.date_select :created_at,:use_month_numbers=>true %>
   </div>
+
   </fieldset>
   <br/>
   
