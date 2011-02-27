@@ -1,3 +1,12 @@
+<style>
+
+
+button.comboboxButton {width:2em;  margin-left: -1px;}
+button.comboboxButton .ui-button-text {display:block; line-height:1;}
+.ui-autocomplete-input {margin:0; padding:0.3em 0 0.31em 0.3em; *padding:0.38em 0 0.46em 0.3em;}
+
+</style>
+
 <h1><%= s_type_to_s(@type)+"单" %></h1>
 
 <%= form_for(@data_form) do |f| %>
@@ -41,3 +50,14 @@
 
 
 <%= link_to '返回', fireworks_path %>
+
+<%= include_autocomplete_js %>
+
+<script>
+$(document).ready(function(){
+  //$('#s3').combobox({size: 25});
+  g_fieldset_html = $("#fieldset0").html();
+  $('#data_form_data_lists_attributes_0_firework_id').combobox({size: 40});
+});
+
+</script>

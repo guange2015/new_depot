@@ -24,4 +24,9 @@ module ApplicationHelper
 	  Base64.decode64(code.gsub(/|/,"%").gsub(/!/,"=").gsub(/\*/,'+').gsub(/\-/,'/'))
 	end
 
+	def include_autocomplete_js
+		javascript_include_tag 'jquery-ui.min',
+			'jquery-ui-i18n','jquery-combobox-min',:cache=>true
+	end
+
 end

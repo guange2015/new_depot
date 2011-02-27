@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>NewDepot</title>
-  <%= stylesheet_link_tag :all, :cache => true %>
+  <%= stylesheet_link_tag 'application','depot','smoothness/jquery-ui', :cache => true %>
   <%= javascript_include_tag 'jquery','rails','new_depot', :cache=>true %>
   <%= csrf_meta_tag %>
 </head>
@@ -14,11 +14,7 @@
 <li><%= link_to "库单操作", data_forms_path %></li>
 </ul>
 </div>
-<div id="container">
-  <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, :id => "flash_#{name}" %>
-  <% end %>
-
+<div id="container">  
   <%= yield %>
 </div>
 
