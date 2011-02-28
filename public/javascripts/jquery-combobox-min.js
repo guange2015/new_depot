@@ -46,4 +46,143 @@ button.comboboxButton .ui-button-text {display:block; line-height:1;}
 .ui-autocomplete-input {margin:0; padding:0.3em 0 0.31em 0.3em; *padding:0.38em 0 0.46em 0.3em;}
 </style>
 */
-;if(typeof $.widget==='function'){(function($){$.widget("ui.combobox",{options:{delay:60,size:0,title:'展开'},_create:function(){var self=this,select=self.element.hide(),size=self.options.size||'',delay=self.options.delay;var select_name=select[0]&&select[0].selectedIndex>=0&&select[0].options[select[0].selectedIndex].text||'&nbsp;';var str=select_name?'<input size="'+size+'" value="'+select_name+'" id="combobox_'+(+new Date())+'" />':'<input>';var input=$(str).insertAfter(select).autocomplete({source:function(request,response){response(select.children("option").not(':disabled').map(function(){var text=$(this).text();if(this.value&&(!request.term||text.indexOf(request.term)>=0)){return{label:text.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)("+$.ui.autocomplete.escapeRegex(request.term)+")(?![^<>]*>)(?![^&;]+;)","gi"),"<strong>$1</strong>"),value:text,option:this}}}))},select:function(event,ui){select.val(ui.item.option.value);ui.item.option.selected=true;self._trigger("selected",event,{item:ui.item.option})},change:function(event,ui){var input=$(this),inputVal=input.val(),valid=false;select.children("option").each(function(){if(this.text===inputVal){this.selected=valid=true;return false}});if(!valid){input.val('');select.attr('selectedIndex',-1).val('');return false}},delay:delay,minLength:0}).dblclick(function(){$(this).select()}).addClass("ui-widget ui-widget-content ui-corner-left");if(jQuery.browser.mozilla){input[0].addEventListener('input',function(){var val=this.value;if(val){$(this).autocomplete("search",val)}},false)}input.data("autocomplete")._renderItem=function(ul,item){return $("<li></li>").data("item.autocomplete",item).append("<a>"+item.label+"</a>").appendTo(ul)};$("<button  type='button'>&nbsp;</button>").attr("tabIndex",-1).attr("title",self.options.title).insertAfter(input).button({icons:{primary:"ui-icon-triangle-1-s"},text:false}).removeClass("ui-corner-all").addClass("ui-corner-right ui-button-icon comboboxButton").click(function(){if(input.autocomplete("widget").is(":visible")){input.autocomplete("close");return}input.autocomplete("search","").focus()})},_setOption:function(key,value){var self=this;var select=self.element,input=select.next();if(key=='size'){value=parseInt(value,10);input.attr('size',value)}else{this.options[key]=value}}})})(jQuery)};
+
+// combobox
+if (typeof $.widget === 'function') {
+	(function($) {
+		$.widget("ui.combobox", {
+			options: {
+				delay: 60,
+				size: 0,
+				title: '展开'
+			},
+			_create: function() {
+				var self = this,
+					select = self.element.hide(),
+					size = self.options.size || '',
+					delay = self.options.delay;
+				
+				// add waiting
+				var select_name = select[0] && select[0].selectedIndex >=0 && select[0].options[select[0].selectedIndex].text || '&nbsp;';
+				var str = select_name ? '<input size="' + size + '" value="' + select_name + '" id="combobox_' + (+ new Date()) +  '" />' : '<input>';
+				// 设定默认值为<select>选定项目
+				var input = $(str)
+					.insertAfter(select)
+					.autocomplete({
+						source: function(request, response) {
+							// var matcher = new RegExp(request.term, "i");	// 当输入如c++的类正则字符时会抛出 invalid quantifier +
+							// edit waiting: 使用not过滤掉被禁止项目，实现通过仅用项目来动态屏蔽搜索结果
+							response(select.children("option").not(':disabled').map(function() {
+								var text = $(this).text();
+								// if (this.value && (!request.term || matcher.test(text)))
+								if (this.value && (!request.term || text.indexOf(request.term) >= 0)) {
+									return {
+										label: text.replace(
+											new RegExp(
+												"(?![^&;]+;)(?!<[^<>]*)(" +
+												$.ui.autocomplete.escapeRegex(request.term) +
+												")(?![^<>]*>)(?![^&;]+;)", "gi"
+											), "<strong>$1</strong>" ),
+										value: text,
+										option: this
+									};
+								}
+							}));
+						},
+						// FIX change事件的滞后性,用于表单当通过按钮选择项目后直接提交会导致select选项未更新 !
+						select: function(event, ui) {
+							select.val( ui.item.option.value );	// 更新select值
+							firework_select(ui.item.option.value);
+							ui.item.option.selected = true;
+							self._trigger("selected", event, {
+								item: ui.item.option
+							});
+							// select.change();
+						},
+						change: function(event, ui) {	// 用select事件来联动select,change只用来做输入不匹配时处理
+							
+						//if (!ui.item) {	// 当选择提示条目后继续输入到不匹配状态然后失焦,IE为空,FF为真,故跳过此判断
+							var input = $(this),
+								inputVal = input.val(),
+								valid = false;
+							select.children( "option" ).each(function() {
+								if ( this.text === inputVal ) {	// 如果手动输入有匹配项目则不清空
+									this.selected = valid = true;									
+									return false;
+								}
+							});
+							if (!valid) {
+								// remove invalid value, as it didn't match anything
+								input.val('');
+								select.attr('selectedIndex', -1).val('');
+								return false;
+							}
+							//}
+						},
+						delay: delay,
+						minLength: 0
+					})
+					.dblclick(function() {
+						$(this).select();
+					})
+					.addClass("ui-widget ui-widget-content ui-corner-left");
+				
+				// FF下绑定input事件来兼容输入法中文输入
+				if (jQuery.browser.mozilla) {
+					input[0].addEventListener(
+							'input', 
+							function() {
+								var val = this.value;
+								if (val) {
+									$(this).autocomplete("search", val);
+								}
+							}, false
+					);
+				}
+				
+				input.data( "autocomplete" )._renderItem = function( ul, item ) {
+					return $( "<li></li>" )
+						.data( "item.autocomplete", item )
+						.append( "<a>" + item.label + "</a>" )
+						.appendTo( ul );
+				};
+				
+				$("<button type='button'>&nbsp;</button>")
+				.attr("tabIndex", -1)
+				.attr("title", self.options.title)
+				.insertAfter(input)
+				.button({
+					icons: {
+						primary: "ui-icon-triangle-1-s"
+					},
+					text: false
+				}).removeClass("ui-corner-all")
+				.addClass("ui-corner-right ui-button-icon comboboxButton")
+				.click(function() {
+					// close if already visible
+					if (input.autocomplete("widget").is(":visible")) {
+						input.autocomplete("close");
+						return;
+					}
+					// pass empty string as value to search for, displaying all results
+					input.autocomplete("search", "").focus();
+					//alert(input.autocomplete( "option", "source" ) )
+				});
+			},
+				
+			_setOption: function(key, value) {
+				var self = this;
+				var select = self.element,
+					input = select.next();
+				if (key == 'size') {
+					value = parseInt(value, 10);
+					input.attr('size', value);	
+				}
+				else {
+					this.options[key] = value;
+				}
+			}
+		});
+	})(jQuery);
+}
+// ui-autocomplete-input ui-widget ui-widget-content ui-corner-left ui-autocomplete-loading

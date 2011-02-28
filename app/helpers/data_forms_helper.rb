@@ -6,4 +6,12 @@ module DataFormsHelper
               :onchange => ""
   end
 
+  def depot_data_fill()
+  	s = ''
+  	Firework.all.each do |f| 
+  		s += "$('#depot_last_data').data('#{f.id}',#{f.lastdata});"
+  	end
+  	s
+  end
+
 end

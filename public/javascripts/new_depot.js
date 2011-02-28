@@ -13,3 +13,8 @@ function add_data_list()
 
 	$("#fieldset"+(num)).fadeIn(1500);
 }
+
+function firework_select(id)
+{
+	$('#depot_last_data').html($('#depot_last_data').data(id));
+}
