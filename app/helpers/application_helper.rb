@@ -26,7 +26,7 @@ module ApplicationHelper
 
 	def include_autocomplete_js
 		javascript_include_tag 'jquery-ui.min',
-			'jquery-ui-i18n','jquery-combobox-min',:cache=>'auto_complete_all'
+			'jquery-ui-i18n','jquery-combobox-min'
 	end
 
 	def admin?
