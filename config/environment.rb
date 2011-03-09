@@ -10,5 +10,5 @@ ActionMailer::Base.smtp_settings = {
    :domain => "163.com",  
    :authentication => :login,  
    :user_name => "xiao992005",  
-   :password => "***",  
+   :password => "${ENV['SMTP_PASSWORD']}",  
 }  
