@@ -1,5 +1,7 @@
 NewDepot::Application.routes.draw do
 
+  get "fireworks/back_up"
+
   resources :fireworks
   resources :data_forms
   resources :data_lists

@@ -2,6 +2,10 @@ class FireworksController < ApplicationController
   def new
   	@firework = Firework.new
   end
+  
+  def back_up
+    UserMailer.backup.deliver!
+  end
 
   def create
   	@firework = Firework.new(params[:firework])

@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class FireworksControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
+  test "should get back_up" do
+    get :back_up
     assert_response :success
   end
 
