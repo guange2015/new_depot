@@ -7,8 +7,8 @@ ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {  
    :address => "smtp.163.com",  
    :port => 25,  
-   :domain => "163.com",  
+   :domain => "www.163.com",  
    :authentication => :login,  
    :user_name => "xiao992005",  
-   :password => "${ENV['SMTP_PASSWORD']}",  
+   :password => "${ENV['SMTP_PASSWORD']}"  
 }  

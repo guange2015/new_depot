@@ -4,11 +4,11 @@ task :cron => :environment do
   end
 
   if Time.now.hour == 0 # run at midnight
-    project_path = Rails.root
-	  db_file = File.expand_path("db/production.sqlite3",project_path)
+    #project_path = Rails.root
+	  #db_file = File.expand_path("db/production.sqlite3",project_path)
 	  
 	  puts "sending"
-	  UserMailer.backup(db_file).deliver		
+	  UserMailer.backup().deliver		
 	  puts "done"
   end
   
