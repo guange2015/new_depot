@@ -1,4 +1,6 @@
 <h1>入出库单</h1>
+<%= link_to "新入库单", new_data_form_path(:type=>"in") %>|<%= link_to "新出库单", new_data_form_path(:type=>"out") %>
+<br />
 
 <table>
 	<tr>	
@@ -19,6 +21,6 @@
 	</tr>
 	<% end %>
 </table>
-
-<p/>
-<%= link_to "新入库单", new_data_form_path(:type=>"in") %>|<%= link_to "新出库单", new_data_form_path(:type=>"out") %>
+<div class="flickr_pagination">
+      <%=h will_paginate @data_forms, :prev_label=>'上一页', :next_label=> '下一页' %>
+</div>
