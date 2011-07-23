@@ -23,11 +23,11 @@
 	<% if f.finished? %>
 	<tr>		
 		<td><%= f.get_type %></td>
-		<td><%= f.data_form.comment %></td>
+		<td><%= link_to f.data_form.comment, f.data_form %></td>
 		<td><%= f.before_data %></td>		
 		<td><%= f.data_number %></td>
 		<td><%= f.last_data %></td>
-		<td><%= format_date(f.created_at) %></td>
+		<td><%= format_date(f.data_form.created_at) %></td>
 	</tr>
 	<% end %>
 	<% end %>
