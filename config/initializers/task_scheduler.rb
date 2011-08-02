@@ -61,7 +61,7 @@ def execute_scheduler
         $logger.info "Log"
     end
 
-    scheduler.every("2h") do
+    scheduler.every("24h") do
         $logger.info "starting backup"
 	begin
           backup_by_sae
