@@ -44,14 +44,14 @@ def execute_scheduler
         $logger.info "Log"
     end
 
-    scheduler.every("2h") do
-       # $logger.info "starting backup"
-       # begin
-       #   backup_by_sae
-       # rescue Exception=>e
-       #   $logger.error e.message
-       #   $logger.error e.backtrace.join("\n")
-       # end
+    scheduler.every("24h") do
+        $logger.info "starting backup"
+	begin
+          backup_by_sae
+        rescue Exception=>e
+          $logger.error e.message
+	  $logger.error e.backtrace.join("\n")
+        end
     end
 end
 
