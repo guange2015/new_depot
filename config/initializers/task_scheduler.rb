@@ -26,7 +26,7 @@ def backup_by_sae
   gz.write content
   gz.close
 
-  date = Time.now.strftime('%Y%m%d%k%M')
+  date = Time.now.strftime('%Y%m%d%H%M')
   
   $logger.info Net::HTTP.post_form( URI.parse(url), 
 	        {'version'=>date,
@@ -45,13 +45,13 @@ def execute_scheduler
     end
 
     scheduler.every("2h") do
-        $logger.info "starting backup"
-	begin
-          backup_by_sae
-        rescue Exception=>e
-          $logger.error e.message
-	  $logger.error e.backtrace.join("\n")
-        end
+       # $logger.info "starting backup"
+       # begin
+       #   backup_by_sae
+       # rescue Exception=>e
+       #   $logger.error e.message
+       #   $logger.error e.backtrace.join("\n")
+       # end
     end
 end
 
