@@ -6,7 +6,7 @@ NewDepot::Application.routes.draw do
   resources :data_forms
   resources :data_lists
   resources :logins
-
+  resources :loadback
   match 'logout' => 'logins#destroy', :as => :logout
 
   match 'finished/:id' => 'fireworks#finished', :as => :finished
