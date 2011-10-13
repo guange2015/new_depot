@@ -9,6 +9,8 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem "will_paginate", "~> 3.0.pre2"
 
+gem "rufus-scheduler", "~> 2.0.10"
+
 group :development do
       #gem 'annotate-models', '1.0.4'
 
