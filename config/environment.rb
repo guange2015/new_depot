@@ -8,7 +8,12 @@ ActionMailer::Base.smtp_settings = {
    :address => "smtp.163.com",  
    :port => 25,  
    :domain => "www.163.com",  
-   :authentication => :login,  
-   :user_name => "xiao992005",  
-   :password => ENV["SMTP_PASSWORD"],
+   :authentication => :plain,  
+   #:authentication => :login,  
+   :user_name => "xiao992005@163.com",  
+   :password => 'love163.com',
+   :openssl_verify_mode => 'none',
+   :enable_starttls_auto => false,
+   ##:password => ENV["SMTP_PASSWORD"],
 }  
+
