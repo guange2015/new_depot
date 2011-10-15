@@ -2,8 +2,12 @@ body{
     /*background-color: #fefefb;*/
 }
 
+.table ul li{
+	list-style:none;
+}
+
 table {
-    width: 900px;
+    width: 90%;
     border: 1px solid #999;
     border-collapse: collapse;
 }
