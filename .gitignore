@@ -4,3 +4,5 @@ log/*.log
 tmp/**/*
 *.sublime-project
 tmp/
+.Ds_Store
+

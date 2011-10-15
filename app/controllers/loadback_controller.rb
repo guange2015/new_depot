@@ -14,27 +14,31 @@ class LoadbackController < ActionController::Base
 
     ss = content.split('-'*20)
     if ss.class == Array and ss.length == 3 
-      Firework.delete_all
       fireworks = ActiveSupport::JSON.decode ss[0]
-      fireworks.each do|x|
-        Firework.create!(x["firework"])
-      end
+      insert_data(Firework, fireworks, 'firework')
 
-      DataForm.delete_all
       data_forms = ActiveSupport::JSON.decode ss[1]
-      data_forms.each do |x|
-        DataForm.create!(x['data_form'])
-      end
+      insert_data(DataForm, data_forms, 'data_form')
 
       data_lists = ActiveSupport::JSON.decode ss[2]
-      DataList.delete_all
-      data_lists.each do |x|
-        DataList.create!(x['data_list'])
-      end
+      insert_data(DataList, data_lists, 'data_list')
       render :text => 'success'
     else
       render :text => 'fail'
-    end
-    
+    end    
   end
+  
+  private
+  def insert_data(cls, rows, data)
+    cls.delete_all
+    rows.each do|x|
+      id = x[data].delete 'id'
+      puts id
+      row = cls.new(x[data])
+      puts row.inspect
+      row.id = id
+      row.save!
+    end
+  end
+
 end
