@@ -33,9 +33,7 @@ class LoadbackController < ActionController::Base
     cls.delete_all
     rows.each do|x|
       id = x[data].delete 'id'
-      puts id
       row = cls.new(x[data])
-      puts row.inspect
       row.id = id
       row.save!
     end
