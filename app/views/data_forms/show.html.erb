@@ -24,9 +24,9 @@
  <%=d.label "品名==规格" %>：
  <%= select_firework_name_tag(d) %>  
  <span>库存：</span><span id="depot_last_data" class="high">0</span>
- <%= d.label s_type_to_s(@type)+"量" %>：
+ <%= d.label @data_form.get_type+"量" %>：
  <%= d.text_field :data_number,:size=>3 %><span class="require">*必须填写数字</span>
- <%= d.hidden_field :s_type,:value => s_type_to_value(@type) %>
+ <%= d.hidden_field :s_type,:value => @data_form.s_type %>
  <%= d.hidden_field :data_form_id,:value => @data_form.id.to_s %>
  <%= d.submit '新增' %>
 <% end %>
@@ -53,7 +53,7 @@
 		<td><%= format_date(f.created_at) %></td>
 		<td><%= f.data_number %></td>
 		<td><%= f.last_data %></td>
-		<td><%= link_to("删除", data_list_path(f)+"?data_form_id="+@data_form.id.to_s, :method => :delete, :confirm => "确定删除?") %></td>
+		<td><%= link_delete( data_list_path(f)+"?data_form_id="+@data_form.id.to_s ) %></td>
 	</tr>
 	<% end %>
 </table>
