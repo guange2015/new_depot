@@ -5,12 +5,12 @@ require 'stringio'
 class LoadbackController < ActionController::Base
   
   def index
-    data = Net::HTTP.get(URI.parse('http://90tian-backup.stor.sinaapp.com/201110111548'))
-    puts data.length
+    data = Net::HTTP.get(URI.parse('http://90tian-backup.stor.sinaapp.com/'+params[:id]))
+    logger.debug data.length
 
     content = Zlib::GzipReader.new(StringIO.new(data)).read()
 
-    puts content.length 
+    logger.debug content.length 
 
     ss = content.split('-'*20)
     if ss.class == Array and ss.length == 3 
