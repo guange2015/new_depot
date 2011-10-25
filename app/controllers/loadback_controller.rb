@@ -5,7 +5,7 @@ require 'stringio'
 class LoadbackController < ActionController::Base
   
   def index
-    data = Net::HTTP.get(URI.parse('http://90tian-backup.stor.sinaapp.com/201110111548'))
+    data = Net::HTTP.get(URI.parse('http://90tian-backup.stor.sinaapp.com/'+params[:id]))
     puts data.length
 
     content = Zlib::GzipReader.new(StringIO.new(data)).read()

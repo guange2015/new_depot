@@ -1,23 +1,24 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'sqlite3'
 
 gem "will_paginate", "~> 3.0.pre2"
 
 gem "rufus-scheduler", "~> 2.0.10"
 
 group :development do
+      gem 'passenger'
       #gem 'annotate-models', '1.0.4'
 
       #gem "mongrel","1.2.0.pre2"
       #gem "cgi_multipart_eof_fix"
       #gem "fastthread"
-# gem 'unicorn'
+      # gem 'unicorn'
 end
 
 # Use unicorn as the web server
