@@ -40,4 +40,59 @@ module ApplicationHelper
 	def current_user
     	_current_user ||= session[:current_user_id]
   	end
+
+  	def logged_in?
+  		!!current_user
+ 	end
+end
+
+
+class MyLinkRenderer < WillPaginate::ActionView::LinkRenderer
+  # Process it! This method returns the complete HTML string which contains
+  # pagination links. Feel free to subclass LinkRenderer and change this
+  # method as you see fit.
+  def to_html
+    html = pagination.map do |item|
+      item.is_a?(Fixnum) ?
+        page_number(item) :
+        send(item)
+    end.join(@options[:link_separator])
+    html = tag(:ul, html)
+    
+    @options[:container] ? html_container(html) : html
+  end
+  
+  protected    
+  def page_number(page)
+    unless page == current_page
+      '<li>'+link(page, page, :rel => rel_value(page))+'</li>'
+    else
+      #tag(:em, page, :class => 'current')
+      '<li class="active">'+link(page, page, :rel => rel_value(page))+'</li>'
+    end
+  end
+
+  def gap
+        text = @template.will_paginate_translate(:page_gap) { '&hellip;' }
+        #%(<span class="gap">#{text}</span>)
+        %(<li class="disabled"><a>#{text}</a></li>)
+  end
+
+  private
+  def previous_or_next_page(page, text, classname)
+  	pre_str = '<li '
+    if page
+      pre_str += ">"
+    else
+      if classname == "next_page"
+      	pre_str += 'class="next disabled">'
+      elsif classname == "previous_page"
+      	pre_str += 'class="prev disabled">'
+      else 
+      	pre_str += 'class="disabled">'
+      end
+    end
+    pre_str + link(text, page ? page: '#')+'</li>'
+  end
+
 end

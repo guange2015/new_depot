@@ -1,8 +1,11 @@
+<div class="page-header">
 <h1>入出库单</h1>
 <%= link_to "新入库单", new_data_form_path(:type=>"in") %>|<%= link_to "新出库单", new_data_form_path(:type=>"out") %>
-<br />
+</div>
 
-<table>
+<div class="mycontent">
+<table class="zebra-striped1">
+<thead>
 	<tr>	
 	<th>单位</th>
 	<th>类型</th>
@@ -10,7 +13,8 @@
 	<th>日期</th>
 	<th>操作</th>
 	</tr>
-
+</thead>
+<tbody>
 	<% @data_forms.each do |f| %>
 	<tr>		
 		<td><%= link_to f.comment, f %></td>
@@ -20,7 +24,8 @@
 		<td><%= link_delete f,!f.finished? %></td>
 	</tr>
 	<% end %>
+</tbody>
 </table>
-<div class="flickr_pagination">
-      <%=h will_paginate @data_forms, :prev_label=>'上一页', :next_label=> '下一页' %>
+
+<%= will_paginate @data_forms, :renderer =>'MyLinkRenderer'%>
 </div>

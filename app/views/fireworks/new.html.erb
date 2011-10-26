@@ -1,8 +1,11 @@
+<div class="page-header">
 <h1>新入库</h1>
+</div>
 
+<div class="mycontent">
 <%= form_for(@firework) do |f| %>
   <% if @firework.errors.any? %>
-    <div id="error_explanation">
+    <div class="alert-message block-message error">
       <h2><%= "有#{@firework.errors.count}个错误" %> :</h2>
 
       <ul>
@@ -13,23 +16,21 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label "名称" %><br />
-    <%= f.text_field :name %>
+  <div class="clearfix">
+    <%= f.label "名称" %>
+    <div class="input"><%= f.text_field :name %></div>
   </div>
-  <div class="field">
-    <%= f.label "规格" %><br />
-    <%= f.text_field :spec %>
+  <div class="clearfix">
+    <%= f.label "规格" %>
+    <div class="input"><%= f.text_field :spec,:class=>"small" %></div>
   </div>
-  <div class="field">
-    <%= f.label "库存" %><br />
-    <%= f.text_field :lastdata %>
+  <div class="clearfix">
+    <%= f.label "库存" %>
+    <div class="input"><%= f.text_field :lastdata,:class=>"mini" %></div>
   </div>
-  <br />
-  <div class="actions">
-    <%= f.submit '提交' %>
+  <div class="clearfix">
+    <%= f.submit '提交' ,:class=>"input btn "%>
   </div>
 <% end %>
 
-
-<%= link_to '返回', fireworks_path %>
+</div>

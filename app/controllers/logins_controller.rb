@@ -6,7 +6,7 @@ class LoginsController < ApplicationController
   end
 
   def create
-  	if authericate(params[:user][:password])
+  	if authericate(params[:password])
   		redirect_to root_path
   	else
   		flash[:error] = "密码错误"

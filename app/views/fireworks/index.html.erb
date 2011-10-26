@@ -1,32 +1,42 @@
 
+<div class="page-header">
 <h1>仓库库存列表</h1>
 <%= form_tag(search_path, :method => "get") do %>
   <%= label_tag(:q, "输入品名关键字:") %>
   <%= text_field_tag(:q) %>
   <%= submit_tag("搜索") %>
 <% end %>
-<br />
+</div>
 
+<div class="mycontent">
+<%= will_paginate @fireworks,:renderer =>'MyLinkRenderer' %>
 <table>
+	<thead>
 	<tr>
 	<th>品名</th>
 	<th>规格</th>
 	<th>库存</th>
+	<th>最后操作时间</th>
 	<th>操作</th>
 	</tr>
+	</thead>
 
+	<tbody>
 	<% @fireworks.each do |f| %>
 	<tr>
 		<td><%= link_to f.name, f %></td>
 		<td><%= f.spec %></td>
 		<td><%= f.lastdata %></td>
+		<td><%= format_date(f.updated_at) %></td>
 		<td><%= link_delete f,f.data_lists.size==0 %></td>
 	</tr>
 	<% end %>
+	</tbody>
 </table>
 
-<div class="flickr_pagination">
-      <%=h will_paginate @fireworks, :prev_label=>'上一页', :next_label=> '下一页' %>
+
+<%= will_paginate @fireworks,:renderer =>'MyLinkRenderer' %>
+
 </div>
 
 <%=include_autocomplete_js%>
@@ -39,4 +49,4 @@
 			source: availableTags
 		});
 	});
-	</script>
+</script>

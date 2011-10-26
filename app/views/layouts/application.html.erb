@@ -2,24 +2,146 @@
 <html>
 <head>
   <title>仓库</title>
-  <%= stylesheet_link_tag 'application','depot','smoothness/jquery-ui' %>
+  <%#= stylesheet_link_tag 'application','depot','smoothness/jquery-ui' %>
+  <%= stylesheet_link_tag 'bootstrap','smoothness/jquery-ui' %>
   <%= javascript_include_tag 'jquery','rails','new_depot' %>
   <%= csrf_meta_tag %>
 
+  <style type="text/css">
+      /* Override some defaults */
+      html, body {
+        background-color: #eee;
+      }
+      body {
+        padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+      }
+      .container > footer p {
+        text-align: center; /* center align it with the container */
+      }
+      .container {
+        width: 860px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+      }
+      .topbar{
+      	font-size: 20px;
+      }
+
+      /* The white background content wrapper */
+      .content {
+        background-color: #fff;
+       
+        /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+
+      /* Page header tweaks */
+      .page-header {
+        background-color: #f5f5f5;
+        padding: 20px 20px 10px;
+        
+      }
+
+      .page-header h1{
+      	font-size: 18px;
+      }
+
+      /* Styles you shouldn't keep as they are for displaying this base example only */
+      .content .mycontent{
+        min-height: 400px;
+        
+      }
+      /* Give a quick and non-cross-browser friendly divider */
+      .content .span4 {
+        margin-left: 0;
+        padding-left: 19px;
+        border-left: 1px solid #eee;
+      }
+
+      .topbar .btn {
+        border: 0;
+      }
+
+
+.pagination {
+  height: 36px;
+  margin: 18px 0;
+}
+.pagination ul {
+  float: left;
+  margin: 0;
+  border: 1px solid #ddd;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.pagination li {
+  display: inline;
+}
+.pagination a {
+  float: left;
+  padding: 0 14px;
+  line-height: 34px;
+  border-right: 1px solid;
+  border-right-color: #ddd;
+  border-right-color: rgba(0, 0, 0, 0.15);
+  *border-right-color: #ddd;
+  /* IE6-7 */
+
+  text-decoration: none;
+}
+.pagination a:hover, .pagination .active a {
+  background-color: #c7eefe;
+}
+.pagination .disabled a, .pagination .disabled a:hover {
+  background-color: transparent;
+  color: #bfbfbf;
+}
+.pagination .next a {
+  border: 0;
+}
+    
+     table tbody tr:hover td {
+		  background-color: #f5f5f5;
+	  }
+    </style>
 </head>
 <body>
-<div class="header">
-<ul>
-<li><%= link_to "库存明细", fireworks_path %></li>
-<li><%= link_to "新入库", new_firework_path,:title=>"仓库没有货进行首次入库" %></li>
+
+<div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="#">仓库</a>
+          <ul class="nav">
+            <li><%= link_to "库存明细", fireworks_path %></li>
+           <li><%= link_to "新入库", new_firework_path,:title=>"仓库没有货进行首次入库" %></li>
 <li><%= link_to "库单操作", data_forms_path ,:title=>"出库和入库单处理"%></li>
-<li><%= link_to "登出", logout_path, :method=>:delete, :title=>"为了安全，做完帐之后要登出。" %></li>
-</ul>
-</div>
-<div id="container">  
+<li><%= link_to "登出", logout_path, :method=>:delete, :title=>"为了安全，做完帐之后要登出。" if logged_in?%></li>
+          </ul>          
+        </div>
+      </div>
+    </div>
+
+
+<div class="container">
+<div class="content">
   <%= yield %>
 </div>
 
 <%= debug params if admin? || (Rails.env.eql? "development") %>
+
+<footer>
+        <p>&copy; Company 2011</p>
+</footer>
+
+</div> <!-- /container -->
+
 </body>
 </html>

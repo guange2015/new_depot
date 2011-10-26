@@ -1,7 +1,7 @@
 #coding=utf-8
 class DataFormsController < ApplicationController
   def index
-  	@data_forms = DataForm.all(:order => "created_at DESC").paginate(:page=>params[:page]||1,:per_page=>20)
+  	@data_forms = DataForm.paginate(:page=>params[:page],:per_page=>20).order("created_at DESC")
   end
 
   def new

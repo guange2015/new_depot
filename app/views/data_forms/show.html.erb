@@ -1,6 +1,10 @@
+<div class="page-header">
 <h1><%= @data_form.comment %></h1>
+</div>
 
+<div class="mycontent">
 <table>
+<thead>
 	<tr>
 	<th>类型</th>
 	<th>品名</th>
@@ -10,7 +14,8 @@
 	<th>库存</th>
 	<th>操作</th>
 	</tr>
-
+</thead>
+<tbody>
 	<% @data_form.data_lists.order("created_at asc").each do |f| %>
 	<tr>
 		<td><%= f.get_type %></td>
@@ -22,7 +27,9 @@
 		<td><%#= link_delete f %></td>
 	</tr>
 	<% end %>
+</tbody>
 </table>
 
 <p/>
 <%= link_to_unless @data_form.finished?,"完成", finished_path(@data_form) %>|<%= link_to "返回", data_forms_path %>
+</div>

@@ -1,12 +1,20 @@
-<h1>请输入密码：</h1>
+<div class="page-header">
+<h1>登陆认证</h1>
+</div>
 
+<div class="mycontent">
 <% if flash[:error] %>
       <p class="error high"><%= flash[:error] %></p>
     <% end %>
 <br/>    
 <%= form_tag('/logins') do -%>
-<div>
-<%= password_field(:user,:password, :size => 20) %>
-<%= submit_tag '确认' %>
+<div class="clearfix">  
+<%= label_tag "密码：" %>  
+<div class="input"><%= password_field_tag :password %>  </div>
+</div>
+
+<div class="clearfix">  
+<%= submit_tag '确认',:class=>"input btn" %>
 </div>
 <% end -%>
+</div>

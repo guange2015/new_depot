@@ -1,3 +1,4 @@
+#coding=utf-8
 # Load the rails application
 require File.expand_path('../application', __FILE__)
 # Initialize the rails application
@@ -17,3 +18,7 @@ ActionMailer::Base.smtp_settings = {
    ##:password => ENV["SMTP_PASSWORD"],
 }  
 
+
+WillPaginate::ViewHelpers.pagination_options[:renderer] = 'MyLinkRenderer'
+WillPaginate::ViewHelpers.pagination_options[:previous_label] = '上一页'
+WillPaginate::ViewHelpers.pagination_options[:next_label] = '下一页'
