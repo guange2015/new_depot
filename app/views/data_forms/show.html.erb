@@ -1,5 +1,39 @@
 <h1><%= @data_form.comment %></h1>
 
+
+<% unless @data_form.finished? %>
+
+<%= form_for @data_list do |d| %>
+
+	<% if @data_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= "有#{@data_list.errors.count}个错误" %> :</h2>
+
+      <ul>
+      <% @data_list.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if flash[:notice] %>
+  <p class="error high"><%= flash[:notice] %></p>
+  <% end %>
+
+ <%=d.label "品名==规格" %>：
+ <%= select_firework_name_tag(d) %>  
+ <span>库存：</span><span id="depot_last_data" class="high">0</span>
+ <%= d.label s_type_to_s(@type)+"量" %>：
+ <%= d.text_field :data_number,:size=>3 %><span class="require">*必须填写数字</span>
+ <%= d.hidden_field :s_type,:value => s_type_to_value(@type) %>
+ <%= d.hidden_field :data_form_id,:value => @data_form.id.to_s %>
+ <%= d.submit '新增' %>
+<% end %>
+
+<% end %>
+
+<h2>以下为已操作的表单：</h2>
 <table>
 	<tr>
 	<th>类型</th>
@@ -19,10 +53,22 @@
 		<td><%= format_date(f.created_at) %></td>
 		<td><%= f.data_number %></td>
 		<td><%= f.last_data %></td>
-		<td><%#= link_delete f %></td>
+		<td><%= link_to("删除", data_list_path(f)+"?data_form_id="+@data_form.id.to_s, :method => :delete, :confirm => "确定删除?") %></td>
 	</tr>
 	<% end %>
 </table>
 
 <p/>
 <%= link_to_unless @data_form.finished?,"完成", finished_path(@data_form) %>|<%= link_to "返回", data_forms_path %>
+
+
+
+<%= include_autocomplete_js %>
+
+<script>
+$(document).ready(function(){
+  g_fieldset_html = $("#fieldset0").html();
+  $('#data_list_firework_id').combobox({size: 40});
+  <%= depot_data_fill %>
+});
+</script>

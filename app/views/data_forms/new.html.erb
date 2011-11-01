@@ -28,42 +28,18 @@ button.comboboxButton .ui-button-text {display:block; line-height:1;}
     <%= f.text_field :comment %><span class="require">*必须填写</span><br/>
     <%= f.label "日期" %>
     <%= f.date_select :created_at,:use_month_numbers=>true %>
+    <%= f.hidden_field :s_type,:value => s_type_to_value(@type) %>
   </div>
-
   </fieldset>
   <br/>
   
-  <%= f.hidden_field :s_type,:value => s_type_to_value(@type) %>
-  <fieldset id="fieldset0">
-  <% f.fields_for :data_lists do |d| %>
-  	<%=d.label "品名==规格" %>：
-  	<%= select_firework_name_tag(d) %>  
-    <span>库存：</span><span id="depot_last_data" class="high">0</span>
-  	<%= d.label s_type_to_s(@type)+"量" %>：
-    <%= d.text_field :data_number,:size=>3 %><span class="require">*必须填写数字</span>
-    <%= d.hidden_field :s_type,:value => s_type_to_value(@type) %>
-  <% end %>
-  </fieldset>
-
   <br />
 
   <div class="actions">
-    <input type="button" onclick="add_data_list();" value="添加详单" /> | <%= f.submit '提交' %>
+      <%= f.submit '提交' %> <%= link_to '返回', data_forms_path %>
   </div>
 <% end %>
 
 
-<%= link_to '返回', fireworks_path %>
 
-<%= include_autocomplete_js %>
 
-<script>
-$(document).ready(function(){
-  //$('#s3').combobox({size: 25});
-  g_fieldset_html = $("#fieldset0").html();
-  $('#data_form_data_lists_attributes_0_firework_id').combobox({size: 40});
-  <%= depot_data_fill %>
-  
-});
-
-</script>
