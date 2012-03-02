@@ -24,6 +24,7 @@ class DataList < ActiveRecord::Base
   #attr_accessor :name, :spec
 
   validates :firework_id, :numericality => true
+  validates :data_number, :numericality => true
 
   def get_type
 	s_type == 2 ? "出库" : "入库"

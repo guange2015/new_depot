@@ -1,6 +1,7 @@
 NewDepot::Application.routes.draw do
 
   get "fireworks/back_up"
+  get 'fireworks/autocomplete_firework_name'
 
   resources :fireworks
   resources :data_forms

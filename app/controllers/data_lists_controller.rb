@@ -13,7 +13,7 @@ class DataListsController < ApplicationController
 			@data_list = DataList.new
 			flash.notice = "添加数据成功！"
 		else
-			flash.notice = "添加数据失败！"
+			flash.notice = "添加数据失败！#{@data_list.errors.full_messages }"
 			p flash.notice
 		end
 		redirect_to @data_form

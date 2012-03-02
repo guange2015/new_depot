@@ -14,3 +14,5 @@ gem "rufus-scheduler", "~> 2.0.10"
 group :development do
       gem "annotate", "~> 2.4.0"
 end
+
+gem 'rails3-jquery-autocomplete'

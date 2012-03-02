@@ -2,7 +2,7 @@
 <h1>仓库库存列表</h1>
 <%= form_tag(search_path, :method => "get") do %>
   <%= label_tag(:q, "输入品名关键字:") %>
-  <%= text_field_tag(:q) %>
+  <%=autocomplete_field_tag 'q', '', fireworks_autocomplete_firework_name_path %>
   <%= submit_tag("搜索") %>
 <% end %>
 <br />
@@ -20,7 +20,7 @@
 		<td><%= link_to f.name, f %></td>
 		<td><%= f.spec %></td>
 		<td><%= f.lastdata %></td>
-		<td><%= link_delete f,f.data_lists.size==0 %></td>
+		<td><%= link_delete f,f.data_lists.empty? %></td>
 	</tr>
 	<% end %>
 </table>
@@ -28,15 +28,3 @@
 <div class="flickr_pagination">
       <%=h will_paginate @fireworks, :prev_label=>'上一页', :next_label=> '下一页' %>
 </div>
-
-<%=include_autocomplete_js%>
-<script>
-	$(function() {
-		var availableTags = 
-		<%=raw @fireworks.map{|f| f.name}%>
-		;
-		$( "#q" ).autocomplete({
-			source: availableTags
-		});
-	});
-	</script>

@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label "名称" %><br />
-    <%= f.text_field :name %>
+    <%=f.autocomplete_field 'name', fireworks_autocomplete_firework_name_path %>
   </div>
   <div class="field">
     <%= f.label "规格" %><br />

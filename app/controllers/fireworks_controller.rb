@@ -1,4 +1,6 @@
 class FireworksController < ApplicationController
+  autocomplete :firework, :name, :full => true,:extra_data => [:lastdata]
+
   def new
   	@firework = Firework.new
   end

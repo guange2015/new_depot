@@ -22,14 +22,19 @@
   <% end %>
 
  <%=d.label "品名==规格" %>：
- <%= select_firework_name_tag(d) %>  
- <span>库存：</span><span id="depot_last_data" class="high">0</span>
+ <%#= select_firework_name_tag(d) %>  
+
+ <%= autocomplete_field_tag '','',fireworks_autocomplete_firework_name_path, 
+ :id_element => "#data_list_firework_id",:update_elements => {:lastdata => "#depot_last_data"}
+%>
+<%= d.text_field :firework_id,:size=>3,:hidden=>true %>
+ <span>库存:</span>
+ <span id="depot_last_data" class="high">0</span>
  <%= d.label @data_form.get_type+"量" %>：
- <%= d.text_field :data_number,:size=>3 %><span class="require">*必须填写数字</span>
+ <%= d.text_field :data_number,:size=>3 %><span class="require">*填数字</span>
  <%= d.hidden_field :s_type,:value => @data_form.s_type %>
  <%= d.hidden_field :data_form_id,:value => @data_form.id.to_s %>
- <%= d.submit '新增' %>
-<% end %>
+<input type="button" onclick="commit_data()" value="新增" />  <% end %>
 
 <% end %>
 
@@ -60,15 +65,3 @@
 
 <p/>
 <%= link_to_unless @data_form.finished?,"完成", finished_path(@data_form) %>|<%= link_to "返回", data_forms_path %>
-
-
-
-<%= include_autocomplete_js %>
-
-<script>
-$(document).ready(function(){
-  g_fieldset_html = $("#fieldset0").html();
-  $('#data_list_firework_id').combobox({size: 40});
-  <%= depot_data_fill %>
-});
-</script>

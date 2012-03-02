@@ -18,3 +18,7 @@ function firework_select(id)
 {
 	$('#depot_last_data').html($('#depot_last_data').data(id));
 }
+
+function commit_data() {
+	document.forms[0].submit();
+}
