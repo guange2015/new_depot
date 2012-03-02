@@ -6,3 +6,17 @@ class FireworkTest < ActiveSupport::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: fireworks
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  spec       :integer
+#  lastdata   :integer         default(0)
+#  created_at :datetime
+#  updated_at :datetime
+#  comment    :string(60)
+#
+
