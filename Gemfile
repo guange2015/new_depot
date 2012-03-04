@@ -16,3 +16,9 @@ group :development do
 end
 
 gem 'rails3-jquery-autocomplete'
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.6"
+  gem "factory_girl", "~> 2.6.0"
+  gem "capybara", "~> 1.1.2"
+end
