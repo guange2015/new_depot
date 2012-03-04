@@ -19,7 +19,8 @@ class FireworksController < ApplicationController
   end
 
   def index
-  	@fireworks = Firework.all(:order => "name,created_at DESC").paginate(:page=>params[:page]||1,:per_page=>20)
+  	@fireworks = Firework.paginate(:page=>params[:page]||1,
+      :per_page=>20).order("name,created_at DESC")
   end
 
   def destroy
