@@ -83,4 +83,4 @@ DEPENDENCIES
   rails3-jquery-autocomplete
   rufus-scheduler (~> 2.0.10)
   sqlite3
-  will_paginate (~> 3.0.pre2)
+  will_paginate (= 3.0.3)
