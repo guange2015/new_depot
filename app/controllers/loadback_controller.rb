@@ -35,7 +35,7 @@ class LoadbackController < ActionController::Base
       id = x[data].delete 'id'
       row = cls.new(x[data])
       row.id = id
-      row.save!
+      row.save! unless data == 'data_list' && !x[data]['data_number']
     end
   end
 
