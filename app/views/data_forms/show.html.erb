@@ -21,7 +21,7 @@
  <%=d.label "品名==规格" %>：
  <%#= select_firework_name_tag(d) %>  
 
- <%= autocomplete_field_tag '','',fireworks_autocomplete_firework_name_path, 
+ <%= autocomplete_field_tag '','',data_forms_autocomplete_firework_name_path, 
  :id_element => "#data_list_firework_id",:update_elements => {:lastdata => "#depot_last_data"}
 %>
 <%= d.text_field :firework_id,:size=>3,:hidden=>true %>

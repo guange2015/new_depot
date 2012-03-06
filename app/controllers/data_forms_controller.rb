@@ -1,5 +1,7 @@
 #coding=utf-8
 class DataFormsController < ApplicationController
+  autocomplete :firework, :name, :display_value => :name_spec, :full => true, :extra_data => [:lastdata,:spec]
+
   def index
   	@data_forms = DataForm.paginate(:page=>params[:page]||1,
       :per_page=>20).order("created_at DESC")
