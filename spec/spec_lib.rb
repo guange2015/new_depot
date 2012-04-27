@@ -2,14 +2,10 @@
 
 module NewDepot
   module SpecLib
-
-    def login
+    def login(password='3666319')
       visit "/logins/new"
-      fill_in "user[password]", :with => "3666319"
+      fill_in "user[password]", :with => password
       click_button "确认"
-
-      page.should have_content("登出")
     end
-
   end
 end

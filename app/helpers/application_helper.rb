@@ -31,8 +31,12 @@ module ApplicationHelper
 	def user?
 		current_user == "user"
 	end
+	
+  def login?
+	  !!current_user
+  end
 
-	def current_user
-    	_current_user ||= session[:current_user_id]
-  	end
+  def current_user
+    @current_user ||= session[:current_user_id]
+  end
 end
