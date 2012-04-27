@@ -19,8 +19,8 @@ class FireworksController < ApplicationController
   end
 
   def index
-  	@fireworks = Firework.paginate(:page=>params[:page]||1,
-      :per_page=>20).order("name,created_at DESC")
+  	@fireworks = Firework.order("name,created_at DESC").
+  	          page(params[:page]||1).per(20)
   end
 
   def destroy
@@ -37,7 +37,7 @@ class FireworksController < ApplicationController
   def search
     @fireworks = my_search(
                     params[:encode] == "base64" ? decode_utf_url(params[:q]) : params[:q], 
-                    params[:spec]).paginate(:page=>params[:page]||1,:per_page=>20)
+                    params[:spec]).page(params[:page]||1).per(20)
     render :index
   end
 
