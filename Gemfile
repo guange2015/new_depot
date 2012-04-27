@@ -6,3 +6,8 @@ gem 'sqlite3'
 gem 'kaminari'
 gem "rufus-scheduler", "~> 2.0.10"
 gem 'rails3-jquery-autocomplete'
+
+
+group :assets do
+  gem 'uglifier', '>= 1.0.3'
+end
