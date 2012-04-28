@@ -1,9 +1,15 @@
 require 'net/http'
 require 'zlib'
 require 'stringio'
+require 'backup'
 
 class LoadbackController < ActionController::Base
-  
+  include NewDepot::Backup
+
+  def new
+    render :text => backup_by_sae
+  end
+
   def index
     data = Net::HTTP.get(URI.parse('http://90tian-backup.stor.sinaapp.com/'+params[:id]))
     logger.debug data.length

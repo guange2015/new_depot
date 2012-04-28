@@ -6,3 +6,4 @@ tmp/**/*
 tmp/
 .Ds_Store
 vendor/cache/*
+public/assets/*
