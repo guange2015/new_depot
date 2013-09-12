@@ -1,0 +1,155 @@
+body{
+    /*background-color: #fefefb;*/
+}
+
+.table ul li{
+	list-style:none;
+}
+
+table {
+    width: 90%;
+    border: 1px solid #999;
+    border-collapse: collapse;
+}
+th{
+    border: 1px solid #999;
+    font-size: 70%;
+}
+td{
+    border: 1px solid #999;
+    text-align:center;
+}
+
+#firework_list{
+  margin: 10px;
+}
+
+#firework_list a{
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+a {
+    /*color: #09c;*/
+    text-decoration: none;
+}
+
+a:hover {
+    /*color: #069;*/
+    text-decoration: underline;
+}
+
+a:visited {
+    /*color: #069;*/
+}
+
+/*
+a.button, .button-like {
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #AAA;
+    -webkit-box-shadow: 1px 1px 3px #AAA;
+    box-shadow: 1px 1px 3px #AAA;
+    background-color: #292929;
+    color: #FFFFF7;
+    padding: 3px 9px;
+    display: inline-block;
+}
+
+a.button:hover {
+    background-color: #CC2A2A;
+    text-decoration: none;
+}*/
+
+.contentdiv{
+    margin:0 auto;  
+    border:1px solid  #CBE7FE;
+    background-color: #EFF7FE;
+    padding:10px;
+    
+    }
+.contentdiv ul{
+    padding-left:0;
+    margin-left:0;
+    list-style:none;     
+    }
+    
+.contentdiv ul li{
+    display:inline-block;
+    overflow:hidden;
+    width:19%;
+    text-align:left;
+    }
+    
+.contentdiv ul li a:hover{
+    color:#F60;
+    background-color:EFF7FE;
+    }
+
+.require,.high{
+    color:red;
+}
+
+.header{
+    margin:0 auto;
+    width:75%;
+    padding:20px 0 0 0;
+    margin-bottom:0px;
+    }
+    
+.header ul{
+    padding:0;
+    margin:0;
+    }
+.header ul li{
+    list-style:none;
+    display:inline-block;
+    width:100px;
+    background-color:#A7B7F5;
+    height:30px;
+    margin-left:0.5px;
+    text-align:center;
+    padding-top:10px;   
+    color: #FFF;
+    font-weight:bold;
+    }
+.header ul li a{
+    color:#F60;
+}
+.header ul li a:hover{
+    color:#06C;
+}
+#container{
+    margin-top:0;
+    }
+
+
+/*分页样式*/
+.flickr_pagination {
+    margin-top: 1em;
+  text-align: center;
+  padding: .3em; }
+  .flickr_pagination a, .flickr_pagination span {
+    padding: .2em .5em; }
+  .flickr_pagination span.disabled {
+    color: #AAA; }
+  .flickr_pagination span.current {
+    font-weight: bold;
+    color: #FF0084; }
+  .flickr_pagination a {
+    border: 1px solid #DDDDDD;
+    color: #0063DC;
+    text-decoration: none; }
+    .flickr_pagination a:hover, .flickr_pagination a:focus {
+      border-color: #003366;
+      background: #0063DC;
+      color: white; }
+  .flickr_pagination .page_info {
+    color: #aaa;
+    padding-top: .8em; }
+  .flickr_pagination .prev_page, .flickr_pagination .next_page {
+    border-width: 2px; }
+  .flickr_pagination .prev_page {
+    margin-right: 1em; }
+  .flickr_pagination .next_page {
+    margin-left: 1em; }

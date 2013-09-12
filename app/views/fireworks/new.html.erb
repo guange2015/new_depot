@@ -1,0 +1,35 @@
+<h1>新入库</h1>
+
+<%= form_for(@firework) do |f| %>
+  <% if @firework.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= "有#{@firework.errors.count}个错误" %> :</h2>
+
+      <ul>
+      <% @firework.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "名称" %><br />
+    <%=f.autocomplete_field 'name', fireworks_autocomplete_firework_name_path %>
+  </div>
+  <div class="field">
+    <%= f.label "规格" %><br />
+    <%= f.text_field :spec %>
+  </div>
+  <div class="field">
+    <%= f.label "库存" %><br />
+    <%= f.text_field :lastdata %>
+  </div>
+  <br />
+  <div class="actions">
+    <%= f.submit '提交' %>
+  </div>
+<% end %>
+
+
+<%= link_to '返回', fireworks_path %>

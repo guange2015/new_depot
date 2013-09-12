@@ -1,0 +1,16 @@
+<%= form_tag('/commands') do %>
+<%= label_tag 'command:' %>
+<%= text_field_tag 'cmd' %>
+<%= submit_tag '提交' %>
+<% end %>
+<div class='sper' />
+<div class='cmd'>
+  <PRE STYLE="font-family:monospace;
+  font-size:0.95em;
+  width: 100%;
+  border:green 1px solid;
+  color:green;
+  background-color:#BFB; ">
+<%= @cmd_response %>
+  </pre>
+</div>

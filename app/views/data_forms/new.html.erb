@@ -1,0 +1,36 @@
+<h1><%= s_type_to_s(@type)+"单" %></h1>
+
+<%= form_for(@data_form) do |f| %>
+  <% if @data_form.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= "有#{@data_form.errors.count}个错误" %> :</h2>
+
+      <ul>
+      <% @data_form.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+  <div class="field">
+    <%= f.label "描述" %>
+    <%= f.text_field :comment %><span class="require">*必须填写</span><br/>
+    <%= f.label "日期" %>
+    <%= f.date_select :created_at,:use_month_numbers=>true %>
+    <%= f.hidden_field :s_type,:value => s_type_to_value(@type) %>
+  </div>
+  </fieldset>
+  <br/>
+  
+  <br />
+
+  <div class="actions">
+      <%= f.submit '提交' %> <%= link_to '返回', data_forms_path %>
+  </div>
+<% end %>
+
+
+
+

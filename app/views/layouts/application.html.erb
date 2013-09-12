@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>仓库</title>
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<div class="header">
+<ul>
+<li><%= link_to "库存明细", fireworks_path %></li>
+<li><%= link_to "新入库", new_firework_path,:title=>"仓库没有货进行首次入库" %></li>
+<li><%= link_to "库单操作", data_forms_path ,:title=>"出库和入库单处理"%></li>
+<% if admin? %>
+<li><%= link_to "备份", new_loadback_path ,:title=>"备份"%></li>
+<li><%= link_to "Shell", new_command_path ,:title=>"备份"%></li>
+<% end %>
+<% if login? %>
+<li><%= link_to "登出", logout_path, :method=>:delete, :title=>"为了安全，做完帐之后要登出。" %></li>
+<% end %>
+</ul>
+</div>
+<div id="container">  
+<%= yield %>
+</div>
+
+<%= debug params if admin? || (Rails.env.eql? "development") %>
+</body>
+</html>

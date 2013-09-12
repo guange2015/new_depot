@@ -1,0 +1,30 @@
+
+<h1>仓库库存列表</h1>
+<%= form_tag(search_path, :method => "get") do %>
+  <%= label_tag(:q, "输入品名关键字:") %>
+  <%=autocomplete_field_tag 'q', '', fireworks_autocomplete_firework_name_path %>
+  <%= submit_tag("搜索") %>
+<% end %>
+<br />
+
+<table>
+	<tr>
+	<th>品名</th>
+	<th>规格</th>
+	<th>库存</th>
+	<th>操作</th>
+	</tr>
+
+	<% @fireworks.each do |f| %>
+	<tr>
+		<td><%= link_to f.name, f %></td>
+		<td><%= f.spec %></td>
+		<td><%= f.lastdata %></td>
+		<td><%= link_delete f,f.data_lists.empty? %></td>
+	</tr>
+	<% end %>
+</table>
+
+<div class="flickr_pagination">
+      <%=h paginate @fireworks %>
+</div>
