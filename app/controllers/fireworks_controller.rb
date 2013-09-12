@@ -69,7 +69,7 @@ class FireworksController < ApplicationController
   def my_search(name, spec=nil)
     find_sql = "name like '%#{name}%'"
     find_sql << " and spec = '#{spec}' " if spec
-    Firework.where(find_sql).order
+    Firework.where(find_sql)
   end 
 
   def firework_params
