@@ -19,7 +19,7 @@ describe "fireworks page" do
   it "should have product name when logined" do
     firework = FactoryGirl.create(:firework)
     login
-    page.should have_selector('td',:text => firework.name)
+    expect(page).to have_selector('td',:text => firework.name)
   end  
   
   context "login failed" do
