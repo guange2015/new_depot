@@ -12,7 +12,7 @@ gem "rufus-scheduler", "~> 2.0.10"
 gem 'qiniu-rs'
 
 #support rails4
-gem 'rails3-jquery-autocomplete', git: 'https://github.com/francisd/rails3-jquery-autocomplete'
+gem 'rails3-jquery-autocomplete', git:'https://github.com/francisd/rails3-jquery-autocomplete'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -41,10 +41,18 @@ group :doc do
 end
 
 
-group :test do
-  gem 'rspec-rails'
+group :development, :test do
+  gem 'terminal-notifier-guard'
+  gem 'faker'
+  gem 'rspec-rails', '~> 2.0'
   gem 'capybara'
   gem "factory_girl_rails"
+  gem 'pry-byebug'
+end
+
+group :development do
+  gem 'guard-rspec'
+  gem 'spring'
 end
 
 # Use ActiveModel has_secure_password

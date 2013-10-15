@@ -1,48 +1,74 @@
-$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
-require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, '1.9.3@new_depot'        # Or whatever env you want it to run in.
-set :rvm_type, :user  # Copy the exact line. I really mean :user here
+require 'mina/bundler'
+require 'mina/rails'
+require 'mina/git'
+# require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
+# require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
-default_run_options[:pty] = true  # Must be set for the password prompt from git to work
+# Basic settings:
+#   domain       - The hostname to SSH to.
+#   deploy_to    - Path to deploy into.
+#   repository   - Git repo to clone from. (needed by mina/git)
+#   branch       - Branch name to deploy. (needed by mina/git)
 
+set :domain, 'foobar.com'
+set :deploy_to, '/var/www/foobar.com'
+set :repository, 'git://...'
+set :branch, 'master'
 
-set :application, "new_depot"
-set :repository,  "git://github.com/hhuai/new_depot.git"
+# Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
+# They will be linked in the 'deploy:link_shared_paths' step.
+set :shared_paths, ['config/database.yml', 'log']
 
-set :scm, :git
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-set :user, "90tian"  # The server's user for deploys
-set :branch, "master"
-set :use_sudo, false
+# Optional settings:
+#   set :user, 'foobar'    # Username in the server to SSH to.
+#   set :port, '30000'     # SSH port number.
 
-set :deploy_to, "~/#{application}"
+# This task is the environment that is loaded for most commands, such as
+# `mina deploy` or `mina rake`.
+task :environment do
+  # If you're using rbenv, use this to load the rbenv environment.
+  # Be sure to commit your .rbenv-version to your repository.
+  # invoke :'rbenv:load'
 
-set :domain, "90tian.com"
-set :git_shallow_clone, 1
+  # For those using RVM, use this to load an RVM version@gemset.
+  # invoke :'rvm:use[ruby-1.9.3-p125@default]'
+end
 
-require 'bundler/capistrano'  
-#set :bundle_flags, '--quiet'  
- 
-role :web, domain
-role :app, domain
+# Put any custom mkdir's in here for when `mina setup` is ran.
+# For Rails apps, we'll make some of the shared paths that are shared between
+# all releases.
+task :setup => :environment do
+  queue! %[mkdir -p "#{deploy_to}/shared/log"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
 
-namespace :deploy do
-  task :start do 
-    run "cd #{current_release}; passenger start -p 3007 -e production -d"
-  end
+  queue! %[mkdir -p "#{deploy_to}/shared/config"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
-  task :stop do 
-    run "cd #{current_release}; passenger stop --port 3007"
-  end
+  queue! %[touch "#{deploy_to}/shared/config/database.yml"]
+  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
+end
 
-  task :redeploy do
-  end
+desc "Deploys the current version to the server."
+task :deploy => :environment do
+  deploy do
+    # Put things that will set up an empty directory into a fully set-up
+    # instance of your project.
+    invoke :'git:clone'
+    invoke :'deploy:link_shared_paths'
+    invoke :'bundle:install'
+    invoke :'rails:db_migrate'
+    invoke :'rails:assets_precompile'
 
-  # Assumes you are using Passenger
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{current_release}/tmp/restart.txt"
-  end
- 
-  task :finalize_update, :except => { :no_release => true } do
+    to :launch do
+      queue "touch #{deploy_to}/tmp/restart.txt"
+    end
   end
 end
+
+# For help in making your deploy script, see the Mina documentation:
+#
+#  - http://nadarei.co/mina
+#  - http://nadarei.co/mina/tasks
+#  - http://nadarei.co/mina/settings
+#  - http://nadarei.co/mina/helpers
+

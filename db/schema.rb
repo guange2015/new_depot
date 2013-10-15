@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20110226061357) do
+ActiveRecord::Schema.define(version: 20131010093547) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "data_forms", force: true do |t|
     t.string   "comment"
@@ -36,10 +42,13 @@ ActiveRecord::Schema.define(version: 20110226061357) do
   create_table "fireworks", force: true do |t|
     t.string   "name"
     t.integer  "spec"
-    t.integer  "lastdata",              default: 0
+    t.integer  "lastdata",               default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "comment",    limit: 60
+    t.string   "comment",     limit: 60
+    t.integer  "category_id"
   end
+
+  add_index "fireworks", ["category_id"], name: "index_fireworks_on_category_id", using: :btree
 
 end

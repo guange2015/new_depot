@@ -15,6 +15,7 @@
 
 class Firework < ActiveRecord::Base
 	has_many :data_lists
+  belongs_to :category
 	
 	validates_numericality_of :lastdata, :message => "库存必须为数字"
 	validates_presence_of :name, :spec, :message => "品名和规格必须填写"
