@@ -2,7 +2,7 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
-# require 'mina/rvm'    # for rvm support. (http://rvm.io)
+require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -10,9 +10,10 @@ require 'mina/git'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'foobar.com'
-set :deploy_to, '/var/www/foobar.com'
-set :repository, 'git://...'
+set :domain, 'test'
+set :deploy_to, '/home/hxg/yanhua'
+# set :repository, 'git://gitcafe.com/hhuai/yanhua.git'
+set :repository, "/home/hxg/git/yanhua.git"  #直接取本地的git项目
 set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
@@ -20,7 +21,7 @@ set :branch, 'master'
 set :shared_paths, ['config/database.yml', 'log']
 
 # Optional settings:
-#   set :user, 'foobar'    # Username in the server to SSH to.
+set :user, 'hxg'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
@@ -31,7 +32,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  # invoke :'rvm:use[ruby-1.9.3-p125@default]'
+  invoke :'rvm:use[ruby-2.0.0-p195@yanhua]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -45,23 +46,41 @@ task :setup => :environment do
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
   queue! %[touch "#{deploy_to}/shared/config/database.yml"]
-  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
 
 desc "Deploys the current version to the server."
 task :deploy => :environment do
   deploy do
+    # queue! %[git push test master]
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    invoke :'rails:db_migrate'
+    invoke :'rails:db_migrate'    
     invoke :'rails:assets_precompile'
 
     to :launch do
-      queue "touch #{deploy_to}/tmp/restart.txt"
+      invoke :'thin:restart'
     end
+  end
+end
+
+namespace :passenger do
+  task :restart do
+    queue %{
+      echo "-----> Restarting passenger"
+      #{echo_cmd %[mkdir -p tmp]}
+      #{echo_cmd %[touch tmp/restart.txt]}
+    }
+  end
+end
+
+namespace :thin do
+  task :restart do
+    #queue  %[ps aux|grep thin|grep -v grep|awk '{print $2}'|xargs kill -9]
+    #queue! %[bundle exec thin start -d -e production -f -p 3002]
+		queue! %[bundle exec thin restart -C yanhuathin.yml]
   end
 end
 
