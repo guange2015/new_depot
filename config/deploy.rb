@@ -61,7 +61,7 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      invoke :'thin:restart'
+      invoke :'thin:start'
     end
   end
 end
@@ -77,10 +77,12 @@ namespace :passenger do
 end
 
 namespace :thin do
-  task :restart do
-    #queue  %[ps aux|grep thin|grep -v grep|awk '{print $2}'|xargs kill -9]
-    #queue! %[bundle exec thin start -d -e production -f -p 3002]
-		queue! %[bundle exec thin restart -C yanhuathin.yml]
+  task :start do
+    if File.exists?('log/thin.pid')
+      queue! %[bundle exec thin restart -C yanhuathin.yml]
+    else
+      queue! %[bundle exec thin start -C yanhuathin.yml]
+    end
   end
 end
 
