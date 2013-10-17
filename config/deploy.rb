@@ -10,10 +10,10 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'test'
-set :deploy_to, '/home/hxg/yanhua'
-# set :repository, 'git://gitcafe.com/hhuai/yanhua.git'
-set :repository, "/home/hxg/git/yanhua.git"  #直接取本地的git项目
+set :domain, 'meimei315.com'
+set :deploy_to, '/home/www/yanhua'
+set :repository, 'https://github.com/hhuai/new_depot.git'
+# set :repository, "/home/www/git/yanhua.git"  #直接取本地的git项目
 set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
@@ -21,7 +21,7 @@ set :branch, 'master'
 set :shared_paths, ['config/database.yml', 'log']
 
 # Optional settings:
-set :user, 'hxg'    # Username in the server to SSH to.
+set :user, 'www'    # Username in the server to SSH to.
 #   set :port, '30000'     # SSH port number.
 
 # This task is the environment that is loaded for most commands, such as
@@ -32,7 +32,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  invoke :'rvm:use[ruby-2.0.0-p195@yanhua]'
+  invoke :'rvm:use[ruby-2.0.0@yanhua]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -45,7 +45,7 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
-  queue! %[touch "#{deploy_to}/shared/config/database.yml"]
+ -- queue! %[touch "#{deploy_to}/shared/config/database.yml"]
 end
 
 desc "Deploys the current version to the server."
