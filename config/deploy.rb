@@ -78,11 +78,11 @@ end
 
 namespace :thin do
   task :start do
-    if File.exists?('log/thin.pid')
+    # if File.exists?('log/thin.pid')
       queue! %[bundle exec thin restart -C yanhuathin.yml]
-    else
-      queue! %[bundle exec thin start -C yanhuathin.yml]
-    end
+    # else
+    #   queue! %[bundle exec thin start -C yanhuathin.yml]
+    # end
   end
 end
 
