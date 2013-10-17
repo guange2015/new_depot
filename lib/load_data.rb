@@ -6,7 +6,7 @@ require 'spreadsheet'
 module NewDepot
   class LoadData
     KEYS = [1,3,4,17,23,31]
-    NAMES = [:name, :spec, :code, :race, :price, :date]
+    NAMES = [:name, :spec, :code, :rate, :price, :date]
 
     def load(opt={}) 
       if opt[:type] == :excel
@@ -32,6 +32,7 @@ module NewDepot
       Firework.create(name: data[:name],
                      spec: data[:spec],
                      price: data[:price],
+                     rate: data[:rate],
                      category: category
                      )
     end
@@ -43,5 +44,3 @@ module NewDepot
 
   end
 end
-
-NewDepot::LoadData.new.load(type: :excel, path: '/Users/hhuai/Downloads/Book1.xls')

@@ -73,6 +73,6 @@ class FireworksController < ApplicationController
   end 
 
   def firework_params
-    params.require(:firework).permit(:name, :spec, :comment, :lastdata)
+    params.require(:firework).permit(:name, :spec, :comment, :lastdata, :rate)
   end
 end

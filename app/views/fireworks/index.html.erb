@@ -12,6 +12,7 @@
 	<th>品名</th>
 	<th>规格</th>
 	<th>库存</th>
+	<th>换算率</th>
 	<th>操作</th>
 	</tr>
 
@@ -20,6 +21,7 @@
 		<td><%= link_to f.name, f %></td>
 		<td><%= f.spec %></td>
 		<td><%= f.lastdata %></td>
+		<td><%= f.rate %></td>
 		<td><%= link_delete f,f.data_lists.empty? %></td>
 	</tr>
 	<% end %>
