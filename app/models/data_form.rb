@@ -1,17 +1,16 @@
-#coding=utf-8
 # == Schema Information
-# Schema version: 20110225150309
 #
 # Table name: data_forms
 #
-#  id         :integer         not null, primary key
+#  id         :integer          not null, primary key
 #  comment    :string(255)
 #  s_type     :integer
-#  state      :integer         default(1)
+#  state      :integer          default(1)
 #  created_at :datetime
 #  updated_at :datetime
 #
 
+#coding=utf-8
 class DataForm < ActiveRecord::Base
 	has_many :data_lists, :dependent => :destroy
 

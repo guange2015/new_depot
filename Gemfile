@@ -42,6 +42,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'spreadsheet'
 
 group :development, :test do
   gem 'terminal-notifier-guard'
@@ -55,16 +56,6 @@ end
 group :development do
   gem 'guard-rspec'
   gem 'spring'
+  gem 'annotate', ">=2.5.0"
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]

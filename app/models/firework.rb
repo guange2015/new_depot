@@ -1,18 +1,18 @@
-#coding=utf-8
 # == Schema Information
-# Schema version: 20110226061357
 #
 # Table name: fireworks
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  spec       :integer
-#  lastdata   :integer         default(0)
-#  created_at :datetime
-#  updated_at :datetime
-#  comment    :string(60)
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  spec        :integer
+#  lastdata    :integer          default(0)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  comment     :string(60)
+#  category_id :integer
 #
 
+#coding=utf-8
 class Firework < ActiveRecord::Base
 	has_many :data_lists
   belongs_to :category

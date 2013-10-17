@@ -1,21 +1,20 @@
-#coding=utf-8
 # == Schema Information
-# Schema version: 20110226061357
 #
 # Table name: data_lists
 #
-#  id           :integer         not null, primary key
+#  id           :integer          not null, primary key
 #  data_form_id :integer
 #  firework_id  :integer
 #  data_number  :integer
 #  last_data    :integer
 #  s_type       :integer
-#  state        :integer         default(1)
+#  state        :integer          default(1)
 #  created_at   :datetime
 #  updated_at   :datetime
 #  before_data  :integer
 #
 
+#coding=utf-8
 class DataList < ActiveRecord::Base
   belongs_to :data_form
   belongs_to :firework
