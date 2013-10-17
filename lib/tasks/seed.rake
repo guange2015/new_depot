@@ -3,6 +3,6 @@ namespace :seed do
   task load_excel: :environment do
     require 'load_data'
     load_data = NewDepot::LoadData.new
-    load_data.load(type: :excel, path: '/Users/hhuai/Downloads/Book1.xls')
+    load_data.load(type: :excel, path: ENV['EXCEL_PATH'] || '/Users/hhuai/Downloads/Book1.xls')
   end
 end
