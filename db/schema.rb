@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131017152232) do
+ActiveRecord::Schema.define(version: 20131018054803) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20131017152232) do
 
   create_table "fireworks", force: true do |t|
     t.string   "name"
-    t.integer  "spec"
+    t.string   "spec"
     t.integer  "lastdata",               default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
