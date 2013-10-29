@@ -19,7 +19,10 @@ class FireworksController < ApplicationController
   end
 
   def index
-  	@fireworks = Firework.order("name,created_at DESC").
+    @categories = Category.categories
+  	condition = Firework
+    condition = condition.where(category_id: params[:root]) if  params[:root] 
+    @fireworks = condition.order("name,created_at DESC").
   	          page(params[:page]||1).per(20)
   end
 

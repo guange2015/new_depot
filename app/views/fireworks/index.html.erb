@@ -7,7 +7,9 @@
 <% end %>
 <br />
 
-<table>
+<%= render partial:'firework_tree', locals: {categories: @categories} %>
+
+<table class="firework_table_list">
 	<tr>
 	<th>品名</th>
 	<th>规格</th>
@@ -30,3 +32,6 @@
 <div class="flickr_pagination">
       <%=h paginate @fireworks %>
 </div>
+<div class="clear" />
+
+  

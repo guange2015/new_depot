@@ -9,3 +9,11 @@
 Firework.delete_all
 DataForm.delete_all
 DataList.delete_all
+Category.delete_all
+
+Category.create(name: '小产品类', code: '01', level: 0)
+Category.create(name: '鞭炮', code: '02', level: 0)
+Category.create(name: '礼花', code: '03', level: 0)
+Category.create(name: '喷花', code: '04', level: 0)
+
+

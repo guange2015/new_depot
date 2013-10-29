@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery-ui-1.8.2.custom.min
 //= require jquery_ujs
+//= require jquery.cookie
+//= require jquery.treeview
 //= require_tree .

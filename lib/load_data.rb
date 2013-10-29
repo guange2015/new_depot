@@ -34,12 +34,17 @@ module NewDepot
                      price: data[:price],
                      rate: data[:rate],
                      category: category
-                     )
+                     ) if category
     end
 
     def find_or_create_category(code)
+      c = Category.where(["code like ?", "#{code.first(2)}%"]).first
+      unless c
+        puts "#{code} can't find"
+        return nil
+      end
       (Category.find_by :code => code) || 
-        Category.create(code: code, name: code)
+        Category.create(code: code, name: code, level: c.id)
     end
 
   end

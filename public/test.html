@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>仓库</title>
+<link href="/assets/jquery.treeview.css?body=1" media="screen" rel="stylesheet" />
+<script src="/assets/jquery-1.4.3.js?body=1"></script>
+<script src="/assets/jquery.cookie.js?body=1"></script>
+<script src="/assets/jquery.treeview.js?body=1"></script>
+<script src="/assets/new_depot.js?body=1"></script>
+<script src="/assets/application.js"></script>
+  <meta content="authenticity_token" name="csrf-param" />
+<meta content="jpv4MduH5WH8SW1oARrVczcd0nfjERoGLCiBNgWoHVY=" name="csrf-token" />
+</head>
+<body>
+<div class="header">
+<ul>
+<li><a href="/fireworks">库存明细</a></li>
+<li><a href="/fireworks/new" title="仓库没有货进行首次入库">新入库</a></li>
+<li><a href="/data_forms" title="出库和入库单处理">库单操作</a></li>
+<li><a data-method="delete" href="/logout" rel="nofollow" title="为了安全，做完帐之后要登出。">登出</a></li>
+</ul>
+</div>
+<div id="container">  
+<div class="category_list">
+  <ul id="browser" class="filetree">
+    <li><span class="folder">Folder 1</span>
+    <ul>
+      <li><span class="file">Item 1.1</span></li>
+    </ul>
+    </li>
+    <li><span class="folder">Folder 2</span>
+    <ul>
+      <li><span class="folder">Subfolder 2.1</span>
+      <ul id="folder21">
+        <li><span class="file">File 2.1.1</span></li>
+        <li><span class="file">File 2.1.2</span></li>
+      </ul>
+      </li>
+      <li><span class="file">File 2.2</span></li>
+    </ul>
+    </li>
+    <li class="closed"><span class="folder">Folder 3 (closed at start)</span>
+    <ul>
+      <li><span class="file">File 3.1</span></li>
+    </ul>
+    </li>
+    <li><span class="file">File 4</span></li>
+  </ul>
+</div>
+
+<h1>仓库库存列表</h1>
+<form accept-charset="UTF-8" action="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+  <label for="q">输入品名关键字:</label>
+  <input data-autocomplete="/fireworks/autocomplete_firework_name" id="q" name="q" type="text" value="" />
+  <input name="commit" type="submit" value="搜索" />
+</form><br />
+
+<table>
+  <tr>
+  <th>品名</th>
+  <th>规格</th>
+  <th>库存</th>
+  <th>换算率</th>
+  <th>操作</th>
+  </tr>
+
+  <tr>
+    <td><a href="/fireworks/401">0445月旅行</a></td>
+    <td>240*10</td>
+    <td>0</td>
+    <td>288</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/401" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/402">0445月旅行</a></td>
+    <td>240*12</td>
+    <td>0</td>
+    <td>288</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/402" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/261">10000克锥形</a></td>
+    <td>1*8</td>
+    <td>0</td>
+    <td>8</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/261" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/273">1000克锥形</a></td>
+    <td>30*1</td>
+    <td>0</td>
+    <td>30</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/273" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/271">100克锥形</a></td>
+    <td>4*40</td>
+    <td>0</td>
+    <td>40</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/271" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/268">100发</a></td>
+    <td>2*1</td>
+    <td>0</td>
+    <td>2</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/268" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/405">100发大飞天鼠</a></td>
+    <td>1*30</td>
+    <td>0</td>
+    <td>30</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/405" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/406">100发小飞天鼠</a></td>
+    <td>1*30</td>
+    <td>0</td>
+    <td>30</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/406" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/326">100发日景</a></td>
+    <td>1*1</td>
+    <td>0</td>
+    <td>1</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/326" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/348">100珠彩珠筒</a></td>
+    <td>24*10</td>
+    <td>0</td>
+    <td>24</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/348" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/316">100珠彩珠筒</a></td>
+    <td>40*10</td>
+    <td>0</td>
+    <td>40</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/316" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/236">10寸电光花</a></td>
+    <td>500*9</td>
+    <td>0</td>
+    <td>500</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/236" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/237">12寸电光花</a></td>
+    <td>240*10</td>
+    <td>0</td>
+    <td>120</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/237" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/238">18寸电光花</a></td>
+    <td>10*100</td>
+    <td>0</td>
+    <td>100</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/238" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/327">19发三声报喜</a></td>
+    <td>24*1</td>
+    <td>0</td>
+    <td>24</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/327" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/352">1号天使双响</a></td>
+    <td>10*60</td>
+    <td>0</td>
+    <td>60</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/352" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/309">1号黑虎</a></td>
+    <td>480*26</td>
+    <td>0</td>
+    <td>480</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/309" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/304">1寸20发</a></td>
+    <td>1*12</td>
+    <td>0</td>
+    <td>12</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/304" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/460">1寸25发</a></td>
+    <td>1*16</td>
+    <td>0</td>
+    <td>16</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/460" rel="nofollow">删除</a></td>
+  </tr>
+  <tr>
+    <td><a href="/fireworks/461">1寸36发</a></td>
+    <td>1*49</td>
+    <td>0</td>
+    <td>49</td>
+    <td><a data-confirm="是否确定删除?" data-method="delete" href="/fireworks/461" rel="nofollow">删除</a></td>
+  </tr>
+</table>
+
+<div class="flickr_pagination">
+        <nav class="pagination">
+    
+    
+        <span class="page current">
+  1
+</span>
+
+        <span class="page">
+  <a href="/fireworks?page=2" rel="next">2</a>
+</span>
+
+        <span class="page">
+  <a href="/fireworks?page=3">3</a>
+</span>
+
+        <span class="page">
+  <a href="/fireworks?page=4">4</a>
+</span>
+
+        <span class="page">
+  <a href="/fireworks?page=5">5</a>
+</span>
+
+        <span class="page gap">...</span>
+
+    <span class="next">
+  <a href="/fireworks?page=2" rel="next">下一页 &rsaquo;</a>
+</span>
+
+    <span class="last">
+  <a href="/fireworks?page=12">最后一页 &raquo;</a>
+</span>
+
+  </nav>
+
+</div>
+
+</div>
+
+<pre class="debug_dump">--- !ruby/hash:ActionController::Parameters
+controller: fireworks
+action: index
+</pre>
+</body>
+</html>
+
