@@ -1,30 +1,19 @@
 = render_crumbs
 %p
   - unless @data_form.finished?
-    = form_for @data_list do |d|
-      - if @data_list.errors.any?
-        #error_explanation
-          %h2
-            = "有#{@data_list.errors.count}个错误"
-            \:
-          %ul
-            - @data_list.errors.full_messages.each do |msg|
-              %li= msg
-      - if flash[:notice]
-        %p.error.high= flash[:notice]
-      = d.label "品名==规格"
-      ：
-      = d.autocomplete_field  :firework, data_forms_autocomplete_firework_name_path, :id_element => '#data_list_firework_id',:update_elements => {:lastdata => "#depot_last_data"}
+    = form_for(@data_list,html:{class:'form-inline'}) do |d|
+      .form-group
+        = d.label "品名==规格", class: 'sr-only'
+        = d.autocomplete_field  :firework, data_forms_autocomplete_firework_name_path, :id_element => '#data_list_firework_id',:update_elements => {:lastdata => "#depot_last_data"}, placeholder: '品名==规格', class: 'form-control'
       = d.text_field :firework_id,:size=>3,:hidden=>true
-      %span 库存:
-      %span#depot_last_data.high 0
-      = d.label @data_form.get_type+"量"
-      ：
-      \#{d.text_field :data_number,:size=>3}
-      %span.require *填数字
+      .form-group
+        = d.label "库存:"
+        = d.label "0", id: "depot_last_data", class:"high"
+      .form-group
+        = d.text_field :data_number,:size=>5, placeholder: "#{@data_form.get_type}量", class: 'form-control'
       = d.hidden_field :s_type,:value => @data_form.s_type
       = d.hidden_field :data_form_id,:value => @data_form.id.to_s
-      <input type="button" onclick="commit_data()" value="新增",html:{class:'btn btn-default'} />
+      = d.submit "新增", class: 'btn btn-default'
   %hr/
   %table.table.table-bordered
     %tr

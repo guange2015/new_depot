@@ -38,6 +38,7 @@ class FireworksController < ApplicationController
   end
 
   def search
+    @categories = Category.categories
     @fireworks = my_search(
                     params[:encode] == "base64" ? decode_utf_url(params[:q]) : params[:q], 
                     params[:spec]).page(params[:page]||1).per(20)

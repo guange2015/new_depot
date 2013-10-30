@@ -135,6 +135,9 @@ GEM
     pry-byebug (1.2.0)
       byebug (~> 2.2)
       pry (~> 0.9.12)
+    pry-remote (0.1.7)
+      pry (~> 0.9)
+      slop (~> 3.0)
     qiniu-rs (3.4.6)
       json (~> 1.7)
       mime-types (~> 1.19)
@@ -249,6 +252,7 @@ DEPENDENCIES
   kaminari
   mysql2
   pry-byebug
+  pry-remote
   qiniu-rs
   rails (= 4.0.0)
   rails3-jquery-autocomplete!

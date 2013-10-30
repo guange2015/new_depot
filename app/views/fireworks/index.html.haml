@@ -1,18 +1,19 @@
-/ <h1>仓库库存列表</h1>
-= render partial:'firework_tree', locals: {categories: @categories}
-%table.table.table-bordered.table-hover
-  %tr
-    %th 品名
-    %th 规格
-    %th 库存
-    %th 换算率
-    %th 操作
-  - @fireworks.each do |f|
-    %tr
-      %td= link_to f.name, f
-      %td= f.spec
-      %td= f.lastdata
-      %td= f.rate
-      %td= link_delete f,f.data_lists.empty?
-= paginate @fireworks
-.clear
+.row
+  .col-md-3
+    = render partial:'firework_tree', locals: {categories: @categories}
+  .col-md-9
+    %table.table.table-bordered.table-hover
+      %tr
+        %th 品名
+        %th 规格
+        %th 库存
+        %th 换算率
+        %th 操作
+      - @fireworks.each do |f|
+        %tr
+          %td= link_to f.name, f
+          %td= f.spec
+          %td= f.lastdata
+          %td= f.rate
+          %td= link_delete f,f.data_lists.empty?
+    = paginate @fireworks
