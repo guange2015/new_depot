@@ -19,9 +19,9 @@ class Firework < ActiveRecord::Base
 	has_many :data_lists
   belongs_to :category
 	
-	validates_numericality_of :lastdata, :message => "库存必须为数字"
-	validates_numericality_of :rate, :message => "换算率必须为数字"
-	validates_presence_of :name, :spec, :message => "品名和规格必须填写"
+	validates_numericality_of :lastdata
+	validates_numericality_of :rate
+	validates_presence_of :name, :spec
 	validates_uniqueness_of :name, :scope => :spec, :message => "此产品已经入库，不需要再入库。"
 
   def name_spec

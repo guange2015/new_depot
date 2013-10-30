@@ -1,5 +1,5 @@
-<h1><%= @data_form.comment %></h1>
-
+<%= render_crumbs %>
+<p/>
 <% unless @data_form.finished? %>
 <%= form_for @data_list do |d| %>
 
@@ -29,12 +29,12 @@
  <%= d.text_field :data_number,:size=>3 %><span class="require">*填数字</span>
  <%= d.hidden_field :s_type,:value => @data_form.s_type %>
  <%= d.hidden_field :data_form_id,:value => @data_form.id.to_s %>
-<input type="button" onclick="commit_data()" value="新增" />  <% end %>
+ <input type="button" onclick="commit_data()" value="新增",html:{class:'btn btn-default'} />  <% end %>
 
 <% end %>
 
-<h2>以下为已操作的表单：</h2>
-<table>
+<hr/>
+<table class="table table-bordered">
 	<tr>
 	<th>类型</th>
 	<th>品名</th>
@@ -59,4 +59,7 @@
 </table>
 
 <p/>
-<%= link_to_unless @data_form.finished?,"完成", finished_path(@data_form) %>|<%= link_to "返回", data_forms_path %>
+<div class="btn-group">
+  <%= link_to_unless @data_form.finished?,"完成", finished_path(@data_form), class:'btn btn-default' %>
+  <%= link_to "返回", data_forms_path,class: 'btn btn-default' %>
+</div>

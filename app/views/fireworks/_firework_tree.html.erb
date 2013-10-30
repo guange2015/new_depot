@@ -1,17 +1,35 @@
+<!-- <div class="category_list"> -->
+<!--   <ul id="browser" class="filetree"> -->
+<!--     <% categories.each do |cate| %> -->
+<!--       <li class="closed"><span class="folder"><%= cate[:root].name %></span> -->
+<!--       <ul> -->
+<!--         <% cate[:cs].each do |cs| %> -->
+<!--         <li> -->
+<!--           <span class="file"> -->
+<!--             <%= link_to cs.name, fireworks_path(root: cs.id),remote: true %> -->
+<!--           </span> -->
+<!--         </li> -->
+<!--         <% end %> -->
+<!--       </ul> -->
+<!--       </li> -->
+<!--     <% end %> -->
+<!--   </ul> -->
+<!-- </div> -->
+
 <div class="category_list">
-  <ul id="browser" class="filetree">
+  <!-- Small button group -->
     <% categories.each do |cate| %>
-      <li class="closed"><span class="folder"><%= cate[:root].name %></span>
-      <ul>
-        <% cate[:cs].each do |cs| %>
+    <div class="btn-group">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+        <%= cate[:root].name %> <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <% cate[:cs].each do |cs| %> 
         <li>
-          <span class="file">
-            <%= link_to cs.name, fireworks_path(root: cs.id),remote: true %>
-          </span>
+          <%= link_to cs.name, fireworks_path(root: cs.id),remote: true %>
         </li>
         <% end %>
       </ul>
-      </li>
+    </div>
     <% end %>
-  </ul>
 </div>

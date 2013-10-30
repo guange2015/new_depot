@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_login
 
+  add_crumb "首页", '/'
+
   private
   def require_login
     unless logged_in?

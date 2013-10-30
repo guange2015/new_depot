@@ -1,0 +1,29 @@
+zh-CN:
+  simple_form:
+    "yes": '是'
+    "no": '否'
+    required:
+      text: '必须'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+
+    labels:
+      firework:
+        name: '品名'
+        spec: '规格'
+        lastdata: '库存量'
+        rate: '换算率'
+      data_form:
+        comment: '名称'
+        created_at: '日期'
+
+  helpers:
+    submit:
+      firework:
+        create: '入库'
+      data_form:
+        create: '确定'

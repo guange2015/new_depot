@@ -10,8 +10,12 @@ gem 'mysql2'
 
 gem 'kaminari'
 gem "rufus-scheduler", "~> 2.0.10"
-
 gem 'qiniu-rs'
+
+gem 'bootstrap-sass', '~> 3.0.0.0.rc'
+gem 'haml-rails'
+gem 'simple_form'
+gem "crummy", "~> 1.8.0"
 
 #support rails4
 gem 'rails3-jquery-autocomplete', git:'https://github.com/francisd/rails3-jquery-autocomplete'

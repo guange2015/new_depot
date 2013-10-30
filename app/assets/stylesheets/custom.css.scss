@@ -1,0 +1,17 @@
+@import 'bootstrap';
+
+/* Account for fixed navbar */
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+/* Reset the container */
+.container {
+  // max-width: none !important;
+  // width: 970px;
+}
+
+.category_list {
+  margin-bottom: 10px;
+}

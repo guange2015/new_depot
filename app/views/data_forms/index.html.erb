@@ -1,8 +1,9 @@
-<h1>入出库单</h1>
-<%= link_to "新入库单", new_data_form_path(:type=>"in") %>|<%= link_to "新出库单", new_data_form_path(:type=>"out") %>
-<br />
-
-<table>
+<div class="btn-group">
+<%= link_to "新入库单", new_data_form_path(:type=>"in"),class: 'btn btn-default' %>
+<%= link_to "新出库单", new_data_form_path(:type=>"out"),class: 'btn btn-success' %>
+</div>
+<p/>
+<table class="table table-bordered table-hover">
 	<tr>	
 	<th>单位</th>
 	<th>类型</th>

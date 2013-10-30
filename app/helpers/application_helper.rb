@@ -28,6 +28,14 @@ module ApplicationHelper
 		current_user == "admin"
 	end
 
+  def menu_link_to(active, *args)
+    s = "<li"
+    s << " class=\"active\"" if active
+    s << ">"
+    s << "#{link_to(*args)}</li>"
+    s.html_safe
+  end
+
 	def user?
 		current_user == "user"
 	end

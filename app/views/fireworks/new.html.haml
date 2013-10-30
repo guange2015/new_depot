@@ -1,0 +1,8 @@
+= simple_form_for(@firework, html:{class: 'form-horizontal'}) do |f| 
+  = f.input :name, url: fireworks_autocomplete_firework_name_path, as: :autocomplete
+  = f.input :spec
+  = f.input :lastdata
+  = f.input :rate
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.button :submit
