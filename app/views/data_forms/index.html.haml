@@ -1,0 +1,20 @@
+.btn-group
+  = link_to "新入库单", new_data_form_path(:type=>"in"),class: 'btn btn-default'
+  = link_to "新出库单", new_data_form_path(:type=>"out"),class: 'btn btn-success'
+%p
+  %table.table.table-bordered.table-hover
+    %tr
+      %th 单位
+      %th 类型
+      %th 状态
+      %th 日期
+      %th 操作
+    - @data_forms.each do |f|
+      %tr
+        %td= link_to f.comment, f
+        %td= f.get_type
+        %td= f.get_state
+        %td= format_date(f.created_at)
+        %td= link_delete f,!f.finished?
+  .flickr_pagination
+    = h paginate @data_forms

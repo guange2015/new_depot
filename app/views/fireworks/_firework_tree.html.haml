@@ -1,0 +1,28 @@
+/ <div class="category_list">
+/ <ul id="browser" class="filetree">
+/ <haml:silent> categories.each do |cate| </haml:silent><haml:block>
+/ <li class="closed"><span class="folder"><haml:loud> cate[:root].name </haml:loud></span>
+/ <ul>
+/ <haml:silent> cate[:cs].each do |cs| </haml:silent><haml:block>
+/ <li>
+/ <span class="file">
+/ <haml:loud> link_to cs.name, fireworks_path(root: cs.id),remote: true </haml:loud>
+/ </span>
+/ </li>
+/ </haml:block>
+/ </ul>
+/ </li>
+/ </haml:block>
+/ </ul>
+/ </div>
+.category_list
+  / Small button group
+  - categories.each do |cate|
+    .btn-group
+      %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
+        = cate[:root].name
+        %span.caret
+      %ul.dropdown-menu{:role => "menu"}
+        - cate[:cs].each do |cs|
+          %li
+            = link_to cs.name, fireworks_path(root: cs.id),remote: true

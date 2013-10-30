@@ -61,5 +61,6 @@ group :development do
   gem 'guard-rspec'
   gem 'spring'
   gem 'annotate', ">=2.5.0"
+  gem "erb2haml"
 end
 

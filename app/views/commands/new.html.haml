@@ -1,0 +1,8 @@
+= form_tag('/commands') do
+  = label_tag 'command:'
+  = text_field_tag 'cmd'
+  = submit_tag '提交'
+.sper
+  .cmd
+    %pre{:style => "font-family:monospace;\n  font-size:0.95em;\n  width: 100%;\n  border:green 1px solid;\n  color:green;\n  background-color:#BFB; "}
+      = @cmd_response

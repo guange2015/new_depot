@@ -1,0 +1,27 @@
+%h1= @firework.name + "=="+@firework.spec.to_s+ "操作明细"
+%p.high
+  最后库存为：#{@firework.lastdata}
+%table.table.table-bordered.table-hover
+  %tr
+    %th 类型
+    %th 标识
+    %th 操作前库存
+    %th 操作数
+    %th 操作后库存
+    %th 日期
+  %tr
+    %td 库存
+    %td= @firework.comment
+    %td 0
+    %td= @firework.lastdata
+    %td= @firework.lastdata
+    %td= format_date(@firework.created_at)
+  - @firework.data_lists.order("created_at asc").each do |f|
+    - if f.finished?
+      %tr
+        %td= f.get_type
+        %td= link_to f.data_form.comment, f.data_form
+        %td= f.before_data
+        %td= f.data_number
+        %td= f.last_data
+        %td= format_date(f.data_form.created_at)

@@ -1,0 +1,17 @@
+%h1 以下为操作影响的数据
+%table
+  %tr
+    %th 单位
+    %th 类型
+    %th 操作前库存
+    %th 操作数据
+    %th 操作后库存
+  - @df.data_lists.each do |f|
+    %tr
+      %td= f.firework.name
+      %td= f.firework.spec
+      %td= f.before_data
+      %td= f.data_number
+      %td= f.last_data
+%br/
+= link_to "返回", data_forms_path

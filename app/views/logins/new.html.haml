@@ -1,0 +1,8 @@
+%h1 请输入密码：
+- if flash[:error]
+  %p.error.high= flash[:error]
+%br/
+= form_tag('/logins') do
+  %div
+    = password_field(:user,:password, :size => 20)
+    = submit_tag '确认'
