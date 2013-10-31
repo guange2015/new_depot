@@ -4,7 +4,6 @@
   = f.input :comment
   = f.input :created_at,as: :string, input_html: { class: "datepicker", value: Time.now.strftime('%Y年%m月%d日')  }
   = f.hidden_field :s_type,value: s_type_to_value(@type) 
-
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.button :submit

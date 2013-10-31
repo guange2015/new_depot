@@ -39,9 +39,11 @@ module NewDepot
 
     def find_or_create_category(code)
       c = Category.where(["code like ?", "#{code.first(2)}%"]).first
+      level = 0
       unless c
         puts "#{code} can't find"
-        return nil
+      else
+        level = c.id
       end
       (Category.find_by :code => code) || 
         Category.create(code: code, name: code, level: c.id)

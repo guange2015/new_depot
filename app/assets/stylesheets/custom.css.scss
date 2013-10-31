@@ -1,4 +1,7 @@
-@import 'bootstrap';
+$font-size-base : 14px;
+
+@import 'bootstrap-custom';
+
 
 /* Account for fixed navbar */
 body {
@@ -25,4 +28,8 @@ body {
 }
 .nav-menu-child {
   display: none;
+  padding-left: 10px;
+  a {
+    color: black;
+  }
 }

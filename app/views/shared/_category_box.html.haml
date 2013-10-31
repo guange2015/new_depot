@@ -1,0 +1,10 @@
+.modal.fade#myModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4.modal-title 选择产品分类
+      .modal-body
+        = render partial:'fireworks/firework_tree', locals: {categories: @categories, selected: true}
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} 关闭

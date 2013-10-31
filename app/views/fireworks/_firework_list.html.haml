@@ -1,0 +1,12 @@
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th 品名
+      %th 规格
+      %th 库存
+  - @fireworks.each do |f|
+    %tr
+      %td= link_to f.name, f
+      %td= f.spec
+      %td= f.lastdata
+= paginate @fireworks

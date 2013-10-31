@@ -19,6 +19,7 @@ class Firework < ActiveRecord::Base
 	has_many :data_lists
   belongs_to :category
 	
+  validates_numericality_of :category_id
 	validates_numericality_of :lastdata
 	validates_numericality_of :rate
 	validates_presence_of :name, :spec

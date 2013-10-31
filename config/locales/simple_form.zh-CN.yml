@@ -17,6 +17,7 @@ zh-CN:
         spec: '规格'
         lastdata: '库存量'
         rate: '换算率'
+        category: '类别'
       data_form:
         comment: '名称'
         created_at: '日期'

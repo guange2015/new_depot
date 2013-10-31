@@ -1,5 +1,6 @@
 class FireworksController < ApplicationController
   autocomplete :firework, :name, :full => true,:extra_data => [:lastdata]
+  before_action :get_categories, only: [:new, :create, :index, :search]
 
   def new
   	@firework = Firework.new
@@ -19,7 +20,6 @@ class FireworksController < ApplicationController
   end
 
   def index
-    @categories = Category.categories
   	condition = Firework
     condition = condition.where(category_id: params[:root]) if  params[:root] 
     @fireworks = condition.order("name,created_at DESC").
@@ -38,7 +38,6 @@ class FireworksController < ApplicationController
   end
 
   def search
-    @categories = Category.categories
     @fireworks = my_search(
                     params[:encode] == "base64" ? decode_utf_url(params[:q]) : params[:q], 
                     params[:spec]).page(params[:page]||1).per(20)
@@ -77,6 +76,11 @@ class FireworksController < ApplicationController
   end 
 
   def firework_params
-    params.require(:firework).permit(:name, :spec, :comment, :lastdata, :rate)
+    params.require(:firework).permit(:name, :spec, :comment, :lastdata, :rate, :category_id)
   end
+
+  def get_categories
+    @categories = Category.categories
+  end
+
 end
