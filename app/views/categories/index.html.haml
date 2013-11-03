@@ -1,0 +1,22 @@
+- content_for :other_style do
+  = stylesheet_link_tag 'x-editable/bootstrap-editable' 
+
+- content_for :other_javascript do
+  = javascript_include_tag 'x-editable/bootstrap-editable'
+%ul
+  - @categories.each do |cate|
+    %li{"cate-id"=>cate[:root].name}
+      = cate[:root].name
+      %ul.cate_class
+        .cate_item_list
+          - cate[:cs].each do |cs|
+            %li.cate_item{"data-pk"=>cs.id, "data-type"=>"text", "data-url"=>"categories/#{cs.id}"}
+              = cs.name
+              %a.glyphicon.glyphicon-edit.edit
+              %a.glyphicon.glyphicon-remove.remove
+        %button.btn.btn-default.btn-xs.add_cate_item
+          %span.glyphicon.glyphicon-plus-sign
+          新增
+      .clear
+
+

@@ -59,7 +59,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'guard-rspec'
+  gem 'guard-rspec',require: false
+  gem "spring-commands-rspec", require: false
   gem 'spring'
   gem 'annotate', ">=2.5.0"
   gem "erb2haml"

@@ -7,6 +7,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  code       :string(255)
+#  level      :integer
 #
 
 class Category < ActiveRecord::Base

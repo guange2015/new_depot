@@ -16,6 +16,8 @@ NewDepot::Application.routes.draw do
   resources :data_lists
   resources :logins
   resources :loadback
+  resources :categories
+
   get 'logout' => 'logins#destroy', :as => :logout
 
   get 'finished/:id' => 'fireworks#finished', :as => :finished
