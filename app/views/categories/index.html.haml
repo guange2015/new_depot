@@ -1,19 +1,20 @@
-- content_for :other_style do
-  = stylesheet_link_tag 'x-editable/bootstrap-editable' 
-
 - content_for :other_javascript do
-  = javascript_include_tag 'x-editable/bootstrap-editable'
+  = javascript_include_tag 'j-inplace-0.12.0'
 %ul
   - @categories.each do |cate|
-    %li{"cate-id"=>cate[:root].name}
-      = cate[:root].name
-      %ul.cate_class
-        .cate_item_list
-          - cate[:cs].each do |cs|
-            %li.cate_item{"data-pk"=>cs.id, "data-type"=>"text", "data-url"=>"categories/#{cs.id}"}
-              = cs.name
-              %a.glyphicon.glyphicon-edit.edit
-              %a.glyphicon.glyphicon-remove.remove
+    %li{"cate-id"=>cate.name}
+      %span
+        = cate.name
+      .cate_class
+        %ul.cate_item_list.sortable.connectedSortable{"data-pk"=>cate.id}
+          - cate.nodes.each do |cs|
+            %li.cate_item
+              .cate_item_bg
+              %a{"class"=>"editable","data-object"=>cs.id,"data-activator"=>"#edit-activator-#{cs.id}","data-pk"=>cs.id, "data-type"=>"text", "data-url"=>"categories/#{cs.id}", "href"=>"/fireworks?root=#{cs.id}"}
+                = cs.name
+              %span.glyphicon.glyphicon-edit.edit{id: "edit-activator-#{cs.id}"}
+              %a{href:"#{category_path(cs)}",rel:"nofollow","data-remote"=>"true","data-method"=>"delete","data-confirm"=>"是否确认删除?"}
+                %span.glyphicon.glyphicon-remove.remove
         %button.btn.btn-default.btn-xs.add_cate_item
           %span.glyphicon.glyphicon-plus-sign
           新增

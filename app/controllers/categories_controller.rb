@@ -10,15 +10,22 @@ class  CategoriesController < ApplicationController
   end
 
   def update
-    begin
-      pk = params[:pk]
-      cate = Category.find(pk)
-      cate.name = params[:value]
-      cate.save!
-      render json: {status: 'success'}
-    rescue Exception=>e
-      render json: {status: 'error', msg: e.message}
-    end
+    pk = params[:object] || params[:id]
+    cate = Category.find(pk)
+    cate.name = params[:value]
+    cate.save!
+    render :text => cate.name, :status => 200
+  end
+
+  def resort
+    cate = Category.find(params[:id])
+    cate.resort params[:nodes]
+    render :text => 'success'
+  end
+
+  def destroy
+    cate = Category.find(params[:id])
+    cate.destroy if cate.fireworks.empty?
   end
 
 end

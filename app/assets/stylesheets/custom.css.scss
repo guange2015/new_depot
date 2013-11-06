@@ -34,26 +34,35 @@ body {
   }
 }
 
-li.cate_item {
+
+.cate_item {
   display: inline-block;
-  margin: 0 5px;
   position: relative;
-  padding: 5px 5px 0 5px;
-  border-radius: 5px;
-  background-color: #eee;
-  border-top: 15px solid #fff;
   
-  .edit {
-    position: absolute;
-    right: 0;
-    display: none;
+  .cate_item_bg {
+    height: 15px;
   }
+
   .remove {
     position: absolute;
-    right: 15px;
+    right: 5px;
+    top: -5;
     display: none;
   }
+  .edit {
+    position: absolute;
+    right: 20px;
+    top: -5;
+    display: none;
+  }
+  a.editable {
+    margin: 0 5px;
+    padding: 5px 5px 0 5px;
+    border-radius: 5px;
+    background-color: #eee;
+  }
 }
+
 .cate_item_list {
   display: inline-block;
 }
@@ -63,9 +72,6 @@ button.add_cate_item {
   margin: 0 10px;
 }
 
-ul.cate_class {
-  clear: both;
-}
 
 .clear {
   clear: both;

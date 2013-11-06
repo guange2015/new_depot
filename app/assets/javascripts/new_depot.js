@@ -27,34 +27,47 @@ $(function() {
     $('#myModal').modal();
   });
 
-  if ($.fn.editable) {
-    $.fn.editable.defaults.mode = 'inline';
-    $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
-    // $("li.cate_item").editable();
+  if ($.fn.jinplace) {
+    $.fn.jinplace.defaults.ajaxType = 'put';
+    $.fn.jinplace.defaults.placeholder = '';
+    $('.editable').jinplace();
   }
 
-  $("cate_item .edit").on('click',function () {
-    $(this).parent().editable();
+  $(".cate_item").hover(function() {
+    $(this).find(".edit").show();
+    $(this).find(".remove").show();
+  }, function() {
+    $(this).find(".edit").hide();
+    $(this).find(".remove").hide();
   });
 
-  $("li.cate_item").hover(
-    function () {
-     console.log("on hover"); 
-     $(this).find(".edit").show();
-     $(this).find(".remove").show();
-    },
-    function () {
-     console.log("lever"); 
-     $(this).find(".edit").hide();
-     $(this).find(".remove").hide();
-    }
-  );
-
-  $("button.add_cate_item").on('click', function () {
+  $("button.add_cate_item").on('click', function() {
     var node = $("<li class='cate_item'>hahadfadf</li>");
     // node.editable();
     var list = $(this).parent().children().first();
     list.append(node);
   });
+
+  $(".sortable").sortable({
+    connectWith: ".connectedSortable",
+    start: function(event, ui) {
+      $(ui.item).find(".edit").hide();
+      $(ui.item).find(".remove").hide();
+    },
+    update: function( event, ui  ) {
+      var list = event.target;
+      var nodes = $(list).find("li a").map(function(){
+        return $(this).attr("data-pk");
+      }).get();
+      console.log(nodes);
+      $.ajax({
+        type: 'POST',
+        url: '/categories/'+$(list).attr("data-pk")+'/resort',
+        data: {nodes: nodes}
+      }).done(function (msg) {
+        console.log(msg); 
+      });
+    }
+  }).disableSelection();
 
 });

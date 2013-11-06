@@ -8,19 +8,28 @@
 #  updated_at :datetime
 #  code       :string(255)
 #  level      :integer
+#  order      :integer
 #
 
 class Category < ActiveRecord::Base
-  has_many :fireworks
+  has_many :fireworks, dependent: :destroy
+
+  has_many :nodes,->{order(:order)}, class_name: "Category",
+                   foreign_key: :level
+
+  belongs_to :parent, class_name: "Category",
+                      foreign_key: :level
 
   def self.categories
-    ary = []
-    roots = where(level: 0)
-    roots.each do |root|
-      os = where(level: root.id)
-      ary << {root: root, cs: os}
+    where(level: 0)
+  end
+
+  def resort(ids)
+    ids.each_with_index do |id, index|
+      record = nodes.find(id)
+      record.order =  index+1
+      record.save!
     end
-    ary
   end
 
 end

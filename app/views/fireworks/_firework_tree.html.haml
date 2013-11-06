@@ -2,9 +2,9 @@
   %ul.nav.nav-pills.nav-stacked.bs-sidenav
     - categories.each do |cate|
       %li
-        =link_to cate[:root].name, 'javascript: void(0)', class: 'nav-menu-root'
+        =link_to cate.name, 'javascript: void(0)', class: 'nav-menu-root'
         %ul.nav.nav-menu-child
-          - cate[:cs].each do |cs|
+          - cate.nodes.each do |cs|
             %li
               - if defined?(selected) and selected
                 =link_to cs.name, 'javascript: void(0)', class: "nav-menu-leaf", "data-id" => cs.id
