@@ -26,8 +26,9 @@ class Category < ActiveRecord::Base
 
   def resort(ids)
     ids.each_with_index do |id, index|
-      record = nodes.find(id)
+      record = Category.find(id)
       record.order =  index+1
+      record.level = self.id
       record.save!
     end
   end
