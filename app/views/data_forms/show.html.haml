@@ -35,5 +35,7 @@
         %td= link_delete( data_list_path(f)+"?data_form_id="+@data_form.id.to_s, !@data_form.finished? )
   %p
     .btn-group
-      = link_to_unless @data_form.finished?,"完成", finished_path(@data_form), class:'btn btn-default'
+      - unless @data_form.finished?
+        = link_to "完成", finished_path(@data_form), class:'btn btn-default'
       = link_to "返回", data_forms_path,class: 'btn btn-default'
+      = link_to "打印", print_data_form_path(@data_form),class: 'btn btn-default'

@@ -12,7 +12,11 @@ NewDepot::Application.routes.draw do
   get 'data_forms/autocomplete_firework_name'
 
   resources :fireworks
-  resources :data_forms
+  resources :data_forms do
+    member do
+      get 'print'
+    end
+  end
   resources :data_lists
   resources :logins
   resources :loadback

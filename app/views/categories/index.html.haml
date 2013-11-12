@@ -1,5 +1,7 @@
+- content_for :other_style do
+  = stylesheet_link_tag 'bootstrap-editable'
 - content_for :other_javascript do
-  = javascript_include_tag 'j-inplace-0.12.0'
+  = javascript_include_tag 'bootstrap-editable'
 %ul
   - @categories.each do |cate|
     %li{"cate-id"=>cate.name}
@@ -10,9 +12,9 @@
           - cate.nodes.each do |cs|
             %li.cate_item
               .cate_item_bg
-              %a{"class"=>"editable","data-object"=>cs.id,"data-activator"=>"#edit-activator-#{cs.id}","data-pk"=>cs.id, "data-type"=>"text", "data-url"=>"categories/#{cs.id}", "href"=>"/fireworks?root=#{cs.id}"}
+              %a{"class"=>"editable","data-pk"=>cs.id,"data-placement"=>"right","data-type"=>"text", "data-url"=>"categories/#{cs.id}", "href"=>"/fireworks?root=#{cs.id}"}
                 = cs.name
-              %span.glyphicon.glyphicon-edit.edit{id: "edit-activator-#{cs.id}"}
+              %span.glyphicon.glyphicon-edit.edit{"data-id"=>"#{cs.id}"}
               %a{href:"#{category_path(cs)}",rel:"nofollow","data-remote"=>"true","data-method"=>"delete","data-confirm"=>"是否确认删除?"}
                 %span.glyphicon.glyphicon-remove.remove
         %button.btn.btn-default.btn-xs.add_cate_item
@@ -24,5 +26,5 @@
     %button.btn.btn-default
       %span.glyphicon.glyphicon-plus-sign 新增大类
 
-
+=render 'class_input_helper'
 

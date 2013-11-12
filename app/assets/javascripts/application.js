@@ -16,3 +16,10 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+//
+//
+$(function () {
+  $("#print-btn").click(function () {
+    window.print();
+  });
+});

@@ -10,11 +10,15 @@ class  CategoriesController < ApplicationController
   end
 
   def update
-    pk = params[:object] || params[:id]
-    cate = Category.find(pk)
-    cate.name = params[:value]
-    cate.save!
-    render :text => cate.name, :status => 200
+    begin
+      pk = params[:pk] || params[:id]
+      cate = Category.find(pk)
+      cate.name = params[:value]
+      cate.save!
+      render :text => cate.name, :status => 200
+    rescue Exception=>e
+      render :json => {status: 'error', msg: e.message}
+    end
   end
 
   def resort

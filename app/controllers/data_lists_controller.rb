@@ -7,7 +7,6 @@ class DataListsController < ApplicationController
 	def create
 		@data_form = DataForm.find(params[:data_list][:data_form_id])
 		@data_list = DataList.new(data_list_params)
-    binding.remote_pry
 
 		if @data_list.save
 			@data_form.data_lists << @data_list

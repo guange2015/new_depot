@@ -33,6 +33,7 @@ $(function() {
     $('.editable').jinplace();
   }
 
+
   $(".cate_item").hover(function() {
     $(this).find(".edit").show();
     $(this).find(".remove").show();
@@ -41,11 +42,18 @@ $(function() {
     $(this).find(".remove").hide();
   });
 
-  $("button.add_cate_item").on('click', function() {
-    var node = $("<li class='cate_item'>hahadfadf</li>");
-    // node.editable();
-    var list = $(this).parent().children().first();
-    list.append(node);
+  // $.fn.editable.defaults.ajaxOptions = {
+  //   type: "PUT"
+  // };
+  $("li.cate_item>.edit").click(function(e) {
+    var css = ".editable[data-pk=" + $(this).attr("data-id") + "]";
+    e.stopPropagation();
+    $(css).editable({
+      success: function(response, newValue) {
+        if (response.status == 'error') return response.msg; //msg will be shown in editable form
+      }
+    })
+    $(css).editable('toggle');
   });
 
   $(".sortable").sortable({
@@ -54,20 +62,44 @@ $(function() {
       $(ui.item).find(".edit").hide();
       $(ui.item).find(".remove").hide();
     },
-    update: function( event, ui  ) {
+    update: function(event, ui) {
       var list = event.target;
-      var nodes = $(list).find("li a").map(function(){
+      var nodes = $(list).find("li a").map(function() {
         return $(this).attr("data-pk");
       }).get();
       console.log(nodes);
       $.ajax({
         type: 'POST',
-        url: '/categories/'+$(list).attr("data-pk")+'/resort',
-        data: {nodes: nodes}
-      }).done(function (msg) {
-        console.log(msg); 
+        url: '/categories/' + $(list).attr("data-pk") + '/resort',
+        data: {
+          nodes: nodes
+        }
+      }).done(function(msg) {
+        console.log(msg);
       });
     }
   }).disableSelection();
+
+  $("button.add_cate_item").click(function(event) {
+    var offset = $(this).offset();
+    var e = $("#class_input_helper");
+    offset.left += $(this).width() + 30;
+    offset.top -= e.height() / 2;
+    offset.top += $(this).height() / 2;
+    e.show();
+    e.offset(offset);
+    e.find("input").focus();
+    event.stopPropagation();
+  });
+  $("#class_input_helper").click(function(event) {
+    event.stopPropagation();
+  });
+
+  $("body").click(function() {
+    var e = $("#class_input_helper");
+    if (e.is(":visible")) {
+      e.fadeOut();
+    }
+  });
 
 });

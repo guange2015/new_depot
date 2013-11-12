@@ -1,0 +1,39 @@
+body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.data-form-print {
+  height: 315px;
+  max-height: 315px;
+  margin-top: 10px;
+  .title {
+    font-size: 24px;
+    text-align: center;
+  }
+  .detail {
+    li {
+      display: inline-block;
+      padding: 0 20px;
+    }
+  }
+
+
+  .print-table {
+      width: 100%;
+        margin-bottom: 20px; 
+  }
+
+  .print-table thead > tr > th,
+  .print-table thead > tr > td,
+  .print-table tbody > tr > th,
+  .print-table tbody > tr > td,
+  .print-table tfoot > tr > th,
+  .print-table tfoot > tr > td {
+    padding: 4px;
+    line-height: 1.0;
+  }
+
+}
+
+

@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title 仓库
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    = stylesheet_link_tag 'application', media: 'screen,print'
+    = stylesheet_link_tag 'print', media: 'screen,print'
+    = yield :other_style
+    = javascript_include_tag 'application'
+    = yield :other_javascript
+    = csrf_meta_tag
+  %body
+    .container
+      = yield
+      %button#print-btn.btn.btn-primary.btn-lg.hidden-print 打印

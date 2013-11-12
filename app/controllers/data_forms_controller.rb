@@ -3,6 +3,17 @@ class DataFormsController < ApplicationController
   autocomplete :firework, :name, :display_value => :name_spec, :full => true, :extra_data => [:lastdata,:spec]
   add_crumb("库单操作"){|instance| instance.send :data_forms_path}
 
+  def print
+    @data_form = DataForm.find(params[:id])
+    @data_lists = []
+    data_lists = @data_form.data_lists.to_a
+    while data_lists.length > 0
+      @data_lists << data_lists.shift(9)
+    end
+    render layout: 'print_base'
+  end
+
+
   def index
   	@data_forms = DataForm.order("created_at DESC").
   	          page(params[:page]||1).per(20)

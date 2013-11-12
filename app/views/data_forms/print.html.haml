@@ -1,0 +1,31 @@
+-@data_lists.each_with_index do |data_lists, index|
+  .data-form-print
+    .title 积善花炮厂#{@data_form.get_type}单
+    .detail
+      %ul
+        %li 业务类型: 普通采购
+        %li 入库单号: #{@data_form.id} 
+        %li 总页数:   #{@data_lists.count}
+        %li 当前页:   #{index+1}
+        %li 入库日期: #{format_date(@data_form.created_at)}
+        %li 供货单位: 
+    .table-responsive
+      %table.print-table{border:"0.5", cellspacing:"0", bordercolor:"#000000", width:"80%",style:"border-collapse:collapse;"}
+        %thead
+          %tr
+            %th 行号
+            %th 品名
+            %th 型号
+            %th 数量
+            %th 单价
+            %th 金额
+        %tbody
+          - data_lists.each do |f|
+            %tr
+              %td= f.id
+              %td= f.firework.name
+              %td= f.firework.spec
+              %td= f.data_number
+              %td= f.firework.price
+              %td 
+
