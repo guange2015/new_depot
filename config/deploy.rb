@@ -16,9 +16,13 @@ set :repository, 'https://github.com/hhuai/new_depot.git'
 # set :repository, "/home/www/git/yanhua.git"  #直接取本地的git项目
 set :branch, 'master'
 
+set :pid_file, "#{deploy_to}/shared/tmp/pids/#{rails_env}.pid"
+set :app_port, '3004'
+set :app_path, lambda { "#{deploy_to}/#{current_path}"  }
+
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'log']
+set :shared_paths, ['config/database.yml', 'log', 'tmp']
 
 # Optional settings:
 set :user, 'www'    # Username in the server to SSH to.
@@ -64,6 +68,25 @@ task :deploy => :environment do
       invoke :'thin:start'
     end
   end
+end
+
+desc 'Starts the application'
+task :start => :environment do
+  queue "cd #{app_path} ; bundle exec rackup -s puma " +
+    "-p #{app_port} -P #{pid_file} -E #{rails_env} -D"
+  # queue "cd #{app_path} ; RAILS_ENV=#{rails_env} ./script/delayed_job start"
+end
+ 
+desc 'Stops the application'
+task :stop => :environment do
+  # queue "cd #{app_path} ; RAILS_ENV=#{rails_env} ./script/delayed_job stop"
+  queue %[kill -9 `cat #{pid_file}`]
+end
+ 
+desc 'Restarts the application'
+task :restart => :environment do
+  invoke :stop
+  invoke :start
 end
 
 namespace :passenger do
