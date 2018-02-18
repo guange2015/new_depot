@@ -13,45 +13,45 @@
 
 ActiveRecord::Schema.define(version: 20131106100014) do
 
-  create_table "categories", force: true do |t|
-    t.string   "name"
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "code"
-    t.integer  "level"
-    t.integer  "order"
+    t.string   "code",       limit: 255
+    t.integer  "level",      limit: 4
+    t.integer  "order",      limit: 4
   end
 
-  create_table "data_forms", force: true do |t|
-    t.string   "comment"
-    t.integer  "s_type"
-    t.integer  "state",      default: 1
+  create_table "data_forms", force: :cascade do |t|
+    t.string   "comment",    limit: 255
+    t.integer  "s_type",     limit: 4
+    t.integer  "state",      limit: 4,   default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "data_lists", force: true do |t|
-    t.integer  "data_form_id"
-    t.integer  "firework_id"
-    t.integer  "data_number"
-    t.integer  "last_data"
-    t.integer  "s_type"
-    t.integer  "state",        default: 1
+  create_table "data_lists", force: :cascade do |t|
+    t.integer  "data_form_id", limit: 4
+    t.integer  "firework_id",  limit: 4
+    t.integer  "data_number",  limit: 4
+    t.integer  "last_data",    limit: 4
+    t.integer  "s_type",       limit: 4
+    t.integer  "state",        limit: 4, default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "before_data"
+    t.integer  "before_data",  limit: 4
   end
 
-  create_table "fireworks", force: true do |t|
-    t.string   "name"
-    t.string   "spec"
-    t.integer  "lastdata",               default: 0
+  create_table "fireworks", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "spec",        limit: 255
+    t.integer  "lastdata",    limit: 4,   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "comment",     limit: 60
-    t.integer  "category_id"
-    t.float    "price"
-    t.integer  "rate"
+    t.integer  "category_id", limit: 4
+    t.float    "price",       limit: 24
+    t.integer  "rate",        limit: 4
   end
 
   add_index "fireworks", ["category_id"], name: "index_fireworks_on_category_id", using: :btree
