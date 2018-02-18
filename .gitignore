@@ -16,3 +16,4 @@
 /tmp
 /vendor/ruby
 .DS_Store
+config/database.yml
